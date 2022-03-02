@@ -6,7 +6,7 @@ function orderRequest() {
 }
 exports.orderRequest = orderRequest;
 function cancelOrder(id) {
-    return "Cancelled Order with ID: " + id;
+    return `Cancelled Order with ID: ${id}`;
 }
 exports.cancelOrder = cancelOrder;
 exports.default = { orderRequest, cancelOrder };
