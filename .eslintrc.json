@@ -3,11 +3,7 @@
         "es6": true,
         "node": true
     },
-    "extends": [
-        "airbnb-base",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
-    ],
+    "extends": ["airbnb-base", "prettier/@typescript-eslint", "plugin:prettier/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -17,8 +13,6 @@
         "ecmaVersion": 11,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "plugins": ["@typescript-eslint"],
     "rules": {}
 }
