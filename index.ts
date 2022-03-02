@@ -3,5 +3,5 @@ export function orderRequest(): string {
 }
 
 export function cancelOrder(id: number): string {
-    return 'Cancelled Order with ID: ' + id;
+    return `Cancelled Order with ID: ${id}`;
 }
