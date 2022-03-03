@@ -1,5 +1,5 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelOrder = exports.orderRequest = void 0;
 function orderRequest() {
     return 'Made Order';
@@ -9,4 +9,3 @@ function cancelOrder(id) {
     return `Cancelled Order with ID: ${id}`;
 }
 exports.cancelOrder = cancelOrder;
-exports.default = { orderRequest, cancelOrder };
