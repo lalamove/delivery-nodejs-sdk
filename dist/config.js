@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Config = void 0;
 class Config {
     constructor(publicKey, privateKey, env = "sandbox") {
         this.publicKey = publicKey;
@@ -6,3 +8,4 @@ class Config {
         this.env = env;
     }
 }
+exports.Config = Config;

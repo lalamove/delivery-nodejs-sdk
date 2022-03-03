@@ -1,4 +1,4 @@
-class Config {
+export class Config {
     publicKey: string;
     privateKey: string;
     env: string
