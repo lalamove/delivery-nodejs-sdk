@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelOrder = exports.orderRequest = void 0;
 function orderRequest() {
-    return 'Made Order';
+    let config = new Config("PublicKey", "PrivateKey", "Production");
+    return config.env;
 }
 exports.orderRequest = orderRequest;
 function cancelOrder(id) {

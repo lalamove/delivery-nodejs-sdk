@@ -1,5 +1,6 @@
 export function orderRequest(): string {
-    return 'Made Order';
+    let config = new Config("PublicKey", "PrivateKey", "Production");
+    return config.env;
 }
 
 export function cancelOrder(id: number): string {
