@@ -1,5 +1,5 @@
-import { Coordinates } from './coordinates';
-import { Contact } from './contact';
+import { Coordinates } from "./coordinates";
+import { Contact } from "./contact";
 
 export interface Stop {
     id: string;

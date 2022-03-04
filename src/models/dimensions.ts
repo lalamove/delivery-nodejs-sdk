@@ -1,4 +1,4 @@
-import { Measurement } from './measurement';
+import { Measurement } from "./measurement";
 
 export interface Dimensions {
     width: Measurement;

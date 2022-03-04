@@ -3,7 +3,7 @@ export class Config {
     privateKey: string;
     env: string;
 
-    constructor(publicKey: string, privateKey: string, env = 'sandbox') {
+    constructor(publicKey: string, privateKey: string, env = "sandbox") {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
         this.env = env;
