@@ -1,5 +1,3 @@
 export class Order {
-    constructor(parameters: Array<string>) {
-        
-    }
+    constructor(parameters: Array<string>) {}
 }

@@ -8,3 +8,6 @@ test:
 
 clean:
 	rm -R testing
+
+format:
+	npx prettier --write ./src
