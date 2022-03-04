@@ -1,4 +1,4 @@
-import Config from "./config";
+import { Config } from "./config";
 
 export function orderRequest(): string {
     const config = new Config("PublicKey", "PrivateKey", "Production");

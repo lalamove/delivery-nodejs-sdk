@@ -11,4 +11,4 @@ clean:
 
 format:
 	npx prettier --write ./src
-	npm run lint ./src/**/*.ts
+	npm run lint "./src/**"
