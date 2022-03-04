@@ -8,5 +8,3 @@ test:
 
 clean:
 	rm -R testing
-
-
