@@ -1,7 +1,7 @@
 import { Config } from "./config";
 
 export function orderRequest(): string {
-    let config = new Config("PublicKey", "PrivateKey", "Production");
+    const config = new Config("PublicKey", "PrivateKey", "Production");
     return config.env;
 }
 
