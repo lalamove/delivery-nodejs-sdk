@@ -9,13 +9,9 @@ export default class OrderPayload {
 
     private recipients: Recipient[] | undefined;
 
-    private fleetOption?: string;
-
     private isPODEnabled?: boolean;
 
-    private isRecipientSmsEnabled?: boolean;
-
-    private paymentMethod?: string;
+    private isRecipientSMSEnabled?: boolean;
 
     private partner?: string;
 
@@ -32,10 +28,8 @@ export default class OrderPayload {
         this.quotationId = opb.quotationId;
         this.sender = opb.sender;
         this.recipients = opb.recipients;
-        this.fleetOption = opb.fleetOption;
         this.isPODEnabled = opb.isPODEnabled;
-        this.isRecipientSmsEnabled = opb.isRecipientSmsEnabled;
-        this.paymentMethod = opb.paymentMethod;
+        this.isRecipientSMSEnabled = opb.isRecipientSMSEnabled;
         this.partner = opb.partner;
     }
 }

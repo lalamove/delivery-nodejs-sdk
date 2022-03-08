@@ -9,13 +9,9 @@ export default class OrderPayloadBuilder {
 
     recipients: Recipient[] | undefined;
 
-    fleetOption?: string;
-
     isPODEnabled?: boolean;
 
-    isRecipientSmsEnabled?: boolean;
-
-    paymentMethod?: string;
+    isRecipientSMSEnabled?: boolean;
 
     partner?: string;
 
@@ -38,23 +34,13 @@ export default class OrderPayloadBuilder {
         return this;
     }
 
-    withFleetOption(fleetOption: string): OrderPayloadBuilder {
-        this.fleetOption = fleetOption;
-        return this;
-    }
-
     withIsPODEnabled(isPodEnabled: boolean): OrderPayloadBuilder {
         this.isPODEnabled = isPodEnabled;
         return this;
     }
 
-    withIsRecipientSmsEnabled(isRecipientSmsEnabled: boolean): OrderPayloadBuilder {
-        this.isRecipientSmsEnabled = isRecipientSmsEnabled;
-        return this;
-    }
-
-    withPaymentMethod(paymentMethod: string): OrderPayloadBuilder {
-        this.paymentMethod = paymentMethod;
+    withIsRecipientSmsEnabled(isRecipientSMSEnabled: boolean): OrderPayloadBuilder {
+        this.isRecipientSMSEnabled = isRecipientSMSEnabled;
         return this;
     }
 

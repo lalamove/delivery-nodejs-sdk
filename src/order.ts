@@ -28,11 +28,6 @@ export default class Order {
         this.shareLink = "ShareLink";
         this.status = "Status";
         this.priceBreakdown = {
-            base: "15",
-            extraMileage: "13",
-            surcharge: "14",
-            totalBeforeOptimization: "16",
-            totalExcludePriorityFee: "14",
             currency: "HKD",
             total: "14",
         };
