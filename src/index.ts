@@ -14,7 +14,6 @@ export function cancelOrder(id: number): string {
 export function quotationRequest(): Quotation {
     let quotationPayload = QuotationPayloadBuilder.quotationPayload()
         .withLanguage("English")
-        .withScheduleAt("Hello")
         .build();
     let quotaion = Quotation.create(quotationPayload);
     return quotaion;

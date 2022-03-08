@@ -1,8 +1,10 @@
-import {Service} from "./models/service";
+import { Service } from "./models/service";
 
 export default class City {
     id: string;
+
     name: string;
+
     services: Service[];
 
     constructor() {

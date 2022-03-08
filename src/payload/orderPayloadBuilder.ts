@@ -23,8 +23,8 @@ export default class OrderPayloadBuilder {
         return new OrderPayloadBuilder();
     }
 
-    withQuotationID(quotationID: string): OrderPayloadBuilder {
-        this.quotationId = quotationID;
+    withQuotationID(quotationId: string): OrderPayloadBuilder {
+        this.quotationId = quotationId;
         return this;
     }
 

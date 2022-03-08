@@ -1,5 +1,5 @@
 export interface Recipient {
-    stopID: string;
+    stopId: string;
     name: string;
     phone: string;
     remarks: string;

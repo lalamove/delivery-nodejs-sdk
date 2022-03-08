@@ -6,11 +6,11 @@ import { Measurement } from "./models/measurement";
 export default class Order {
     id: string;
 
-    quotationID: string;
+    quotationId: string;
 
     priceBreakdown: PriceBreakdown;
 
-    driverID: string;
+    driverId: string;
 
     shareLink: string;
 
@@ -23,8 +23,8 @@ export default class Order {
     private constructor() {
         // dummy info
         this.id = "ID";
-        this.quotationID = "QuotationID";
-        this.driverID = "DriverID";
+        this.quotationId = "QuotationID";
+        this.driverId = "DriverID";
         this.shareLink = "ShareLink";
         this.status = "Status";
         this.priceBreakdown = {

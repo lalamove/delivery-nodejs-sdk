@@ -1,5 +1,5 @@
-import {Contact} from "./models/contact";
-import {Coordinates} from "./models/coordinates";
+import { Contact } from "./models/contact";
+import { Coordinates } from "./models/coordinates";
 
 export default class Driver {
     id: string;
@@ -19,18 +19,18 @@ export default class Driver {
         this.id = "ID";
         this.contact = {
             name: "Random",
-            phone: "Phone number"
+            phone: "Phone number",
         };
         this.plateNumber = "platenumber";
         this.photo = "Photo";
         this.coordinates = {
             lat: "123",
-            lng: "232"
+            lng: "232",
         };
         this.updatedAt = new Date();
     }
 
-    static retrieve(id: string, orderID: string): Driver {
+    static retrieve(id: string, orderId: string): Driver {
         return new Driver();
     }
 }
