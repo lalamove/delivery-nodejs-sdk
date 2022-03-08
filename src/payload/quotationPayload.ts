@@ -3,7 +3,7 @@ import { Stop } from "../models/stop";
 import { Item } from "../models/item";
 
 export default class QuotationPayload {
-    private scheduleAt: string;
+    private scheduleAt: Date;
 
     private serviceType: string;
 

@@ -3,7 +3,7 @@ import { Item } from "../models/item";
 import QuotationPayload from "./quotationPayload";
 
 export default class QuotationPayloadBuilder {
-    scheduleAt: string | undefined;
+    scheduleAt: Date | undefined;
 
     serviceType: string | undefined;
 
@@ -21,7 +21,7 @@ export default class QuotationPayloadBuilder {
         return new QuotationPayloadBuilder();
     }
 
-    withScheduleAt(scheduleAt: string): QuotationPayloadBuilder {
+    withScheduleAt(scheduleAt: Date): QuotationPayloadBuilder {
         this.scheduleAt = scheduleAt;
         return this;
     }
