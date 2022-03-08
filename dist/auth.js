@@ -23,7 +23,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Auth = void 0;
 const CryptoJS = __importStar(require("crypto-js"));
 class Auth {
     signRequest(config, method, path, body) {
@@ -33,4 +32,4 @@ class Auth {
         return SIGNATURE;
     }
 }
-exports.Auth = Auth;
+exports.default = Auth;

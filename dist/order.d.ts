@@ -1,3 +1,3 @@
-export declare class Order {
+export default class Order {
     constructor(parameters: Array<string>);
 }
