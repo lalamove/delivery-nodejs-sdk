@@ -131,3 +131,4 @@ out
 .pnp.*
 
 testing/
+dist/
