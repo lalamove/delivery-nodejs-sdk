@@ -6,12 +6,12 @@ export default class Market {
 
     cities: City[];
 
-    constructor() {
-        this.id = "ID";
-        this.cities = [];
+    constructor(id: string, cities: City[]) {
+        this.id = id
+        this.cities = cities;
     }
 
     static retrieve(id: string): Market {
-        return new Market();
+        return new Market(id, []);
     }
 }
