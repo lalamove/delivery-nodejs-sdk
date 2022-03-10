@@ -1,9 +1,9 @@
 import { Coordinates } from "./coordinates";
-import { Contact } from "./contact";
+// import { Contact } from "./contact";
 
 export interface Stop {
-    id: string;
+    // id: string;
     coordinates: Coordinates;
     address: string;
-    contact: Contact;
+    // contact: Contact;
 }

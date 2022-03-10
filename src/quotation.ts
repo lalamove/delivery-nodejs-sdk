@@ -19,9 +19,10 @@ export default class Quotation {
 
     stops: Stop[];
 
-    private constructor() {
+    public constructor(a: JSON) {
         // dummy info
-        this.id = "ID";
+        // console.log("a: ", a);
+        this.id = a["data"]["quotationId"];
         this.scheduleAt = new Date();
         this.serviceType = "Service Type";
         this.specialRequests = ["sp1", "sp2"];
@@ -40,7 +41,7 @@ export default class Quotation {
     }
 
     static create(quotationPayload: QuotationPayload): Quotation {
-        return new Quotation();
+        return new Quotation(quotationPayload);
     }
 
     static retrieve(id: string): Quotation {
