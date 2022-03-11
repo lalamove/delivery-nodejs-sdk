@@ -11,10 +11,10 @@ export default class BaseHTTPClient {
         this.config = config;
     }
 
-    async makeCall<ResultType>(
+    protected async makeCall<ResultType, PayloadType>(
         market: string,
         path: string,
-        body?: Array<object>,
+        body?: PayloadType,
         method: string = "GET"
     ): Promise<ResultType> {
         return new Promise<ResultType>((resolve: any, reject: any) => {

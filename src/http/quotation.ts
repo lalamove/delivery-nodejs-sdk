@@ -1,17 +1,16 @@
 import Quotation from "../response/quotation";
 import BaseHTTPClient from "./base";
+import QuotationPayload from "../payload/quotationPayload";
 
-class QuotationHTTPClient extends BaseHTTPClient {
-    constructor(parameters) {}
+export default class QuotationHTTPClient extends BaseHTTPClient {
+    async create(market: string, path: string, body: QuotationPayload): Promise<Quotation> {
+        const response = await this.makeCall<Quotation, QuotationPayload>(
+            market,
+            path,
+            body,
+            "POST"
+        );
 
-    async create(market: string, path: string, body: Array<object>): Quotation {
-        try {
-            const response = await this.makeCall<Quotation>(market, path, body, "POST");
-
-            const q = response as Quotation;
-            return q;
-        } catch (e) {
-            console.log(e);
-        }
+        return response;
     }
 }
