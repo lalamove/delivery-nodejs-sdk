@@ -1,7 +1,7 @@
 import Config from "./config";
 import QuotationPayloadBuilder from "./payload/quotationPayloadBuilder";
-import Quotation from "./quotation";
-
+import Quotation from "./response/quotation";
+export {default as Client} from "./client";
 export function orderRequest(): string {
     const config = new Config("PublicKey", "PrivateKey", "Production");
     return config.env;
@@ -18,3 +18,5 @@ export function quotationRequest(): Quotation {
     let quotaion = Quotation.create(quotationPayload);
     return quotaion;
 }
+
+

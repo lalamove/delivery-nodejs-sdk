@@ -1,17 +1,8 @@
-import { Service } from "./models/service";
-import City from "./city";
+import Base from "./base";
+import { default as MarketResponse } from "./response/market";
 
-export default class Market {
-    id: string;
-
-    cities: City[];
-
-    constructor(id: string, cities: City[]) {
-        this.id = id
-        this.cities = cities;
-    }
-
-    static retrieve(id: string): Market {
-        return new Market(id, []);
+export default class Market extends Base {
+    retrieve(market: string, id: string): MarketResponse {
+        return new MarketResponse(id, []);
     }
 }

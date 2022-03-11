@@ -1,60 +1,25 @@
-import { PriceBreakdown } from "./models/priceBreakdown";
-import { Stop } from "./models/stop";
+import Base from "./base";
+import { default as OrderResponse } from "./response/order";
 import OrderPayload from "./payload/orderPayload";
-import { Measurement } from "./models/measurement";
 
-export default class Order {
-    id: string;
-
-    quotationId: string;
-
-    priceBreakdown: PriceBreakdown;
-
-    driverId: string;
-
-    shareLink: string;
-
-    status: string;
-
-    distance: Measurement;
-
-    stops: Stop[];
-
-    private constructor() {
-        // dummy info
-        this.id = "ID";
-        this.quotationId = "QuotationID";
-        this.driverId = "DriverID";
-        this.shareLink = "ShareLink";
-        this.status = "Status";
-        this.priceBreakdown = {
-            currency: "HKD",
-            total: "14",
-        };
-        this.distance = {
-            unit: "m",
-            value: "155",
-        };
-        this.stops = [];
+export default class Order extends Base {
+    static create(market: string, orderPayload: OrderPayload): OrderResponse {
+        return new OrderResponse();
     }
 
-    static create(orderPayload: OrderPayload): Order {
-        return new Order();
+    static retrieve(market: string, id: string): OrderResponse {
+        return new OrderResponse();
     }
 
-    static retrieve(id: string): Order {
-        return new Order();
+    addPriorityFee(market: string, id: string, priorityFee: string): OrderResponse {
+        return new OrderResponse();
     }
 
-    static addPriorityFee(id: string, priorityFee: string): Order {
-        return new Order();
+    changeDriver(market: string, id: string, reason: string): OrderResponse {
+        return new OrderResponse();
     }
 
-    static changeDriver(id: string, reason: string): Order {
-        return new Order();
-    }
-
-    static cancel(id: string): Order {
-        return new Order();
+    cancel(market: string, id: string): OrderResponse {
+        return new OrderResponse();
     }
 }

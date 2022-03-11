@@ -1,19 +1,9 @@
-import { Service } from "./models/service";
+import Config from "./config";
+import { default as CityResponse } from "./response/city";
+import Base from "./base";
 
-export default class City {
-    id: string;
-
-    name: string;
-
-    services: Service[];
-
-    constructor() {
-        this.id = "ID";
-        this.name = "name";
-        this.services = [];
-    }
-
-    static retrieve(id: string): City {
-        return new City();
+export default class City extends Base {
+    retrieve(market: string, id: string): CityResponse {
+        return new CityResponse();
     }
 }
