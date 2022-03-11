@@ -37,24 +37,4 @@ export default class Order {
         };
         this.stops = [];
     }
-
-    static create(orderPayload: OrderPayload): Order {
-        return new Order();
-    }
-
-    static retrieve(id: string): Order {
-        return new Order();
-    }
-
-    static addPriorityFee(id: string, priorityFee: string): Order {
-        return new Order();
-    }
-
-    static changeDriver(id: string, reason: string): Order {
-        return new Order();
-    }
-
-    static cancel(id: string): Order {
-        return new Order();
-    }
 }

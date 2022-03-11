@@ -12,8 +12,4 @@ export default class City {
         this.name = "name";
         this.services = [];
     }
-
-    static retrieve(id: string): City {
-        return new City();
-    }
 }

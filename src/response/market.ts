@@ -10,8 +10,4 @@ export default class Market {
         this.id = id;
         this.cities = cities;
     }
-
-    static retrieve(id: string): Market {
-        return new Market(id, []);
-    }
 }
