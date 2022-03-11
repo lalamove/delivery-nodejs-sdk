@@ -6,7 +6,7 @@
 const SDKClient = require("delivery-nodejs-sdk");
 // const QuotationPayload = require("delivery-nodejs-sdk/payload/quotationPayload");
 
-const main = () => {
+const main = async () => {
     const sdKClient = new SDKClient.ClientModule(
         new SDKClient.Config(
             "2b5ab9e54f8cd1ff3a02823456ab6ac3",
@@ -15,10 +15,49 @@ const main = () => {
         )
     );
 
-    const res = sdKClient.Quotation.create("HK", SDKClient.QuotationPayload());
-    res.then((x) => console.log(JSON.stringify(x, null, 3))).catch((x) =>
-        console.log(JSON.stringify(x, null, 3))
-    );
+
+    const co = {
+        lat: "22.3353139",
+        lng: "114.1758402",
+    };
+
+    const co2 = {
+        lat: "22.3203648",
+        lng: "114.169773",
+    };
+
+    // const contact: Contact = {
+    //     name: "test",
+    //     phone: "93031007",
+    // };
+
+    const stop1 = {
+        // id: "",
+        coordinates: co,
+        address: "x",
+        // contact,
+    };
+
+    const stop2 = {
+        // id: "",
+        coordinates: co2,
+        address: "x",
+        // contact,
+    };
+
+    const quotationPayload = SDKClient.QuotationPayloadBuilder.quotationPayload()
+        .withLanguage("en_HK")
+        // .withScheduleAt(new Date())
+        .withServiceType("COURIER")
+        .withStops([stop1, stop2])
+        .build();
+    const res = await sdKClient.Quotation.create("HK", quotationPayload);
+    console.log(typeof res);
+    console.log(res);
+
+    // res.then((x) => console.log(JSON.stringify(x, null, 3))).catch((x) =>
+    //     console.log(JSON.stringify(x, null, 3))
+    // );
 };
 main();
 

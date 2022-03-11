@@ -3,7 +3,7 @@ import { Stop } from "../models/stop";
 import { Item } from "../models/item";
 
 export default class QuotationPayload {
-    private scheduleAt: Date;
+    private scheduleAt?: Date;
 
     private serviceType: string;
 
@@ -18,9 +18,6 @@ export default class QuotationPayload {
     private item?: Item;
 
     constructor(qpb: QuotationPayloadBuilder) {
-        if (qpb.scheduleAt === undefined) {
-            throw new Error("ScheduleAt cannot be empty");
-        }
         if (qpb.serviceType === undefined) {
             throw new Error("Service Type cannot be empty");
         }

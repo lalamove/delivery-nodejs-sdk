@@ -38,14 +38,14 @@ export default class BaseHTTPClient {
             };
 
             const request = https.request(options, (res: any) => {
-                // if (res.statusCode > 299) {
-                //     // eslint-disable-next-line no-console
-                //     console.error(
-                //         `Did not get a success response from the server. Code: ${res.statusCode}, Resp ${res}`
-                //     );
-                //     res.resume();
-                //     return;
-                // }
+                if (res.statusCode > 299) {
+                    // eslint-disable-next-line no-console
+                    console.error(
+                        `Did not get a success response from the server. Code: ${res.statusCode}, Resp ${res}`
+                    );
+                    res.resume();
+                    return;
+                }
 
                 console.log(JSON.stringify(body, null, 3));
 

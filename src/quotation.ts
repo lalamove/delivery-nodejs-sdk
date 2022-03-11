@@ -4,7 +4,7 @@ import QuotationPayload from "./payload/quotationPayload";
 import QuotationHTTPClient from "./http/quotation";
 
 export default class Quotation extends Base {
-    create(market: string, quotationPayload: QuotationPayload): Promise<QuotationResponse> {
+    async create(market: string, quotationPayload: QuotationPayload): Promise<QuotationResponse> {
         const httpClient = new QuotationHTTPClient(this.config);
         return httpClient.create(market, "/v3/quotations", quotationPayload);
     }

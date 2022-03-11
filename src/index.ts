@@ -6,6 +6,7 @@ export { default as ClientModule } from "./client";
 // export * as Config from "./config";
 export { default as Config } from "./config";
 
+export { default as QuotationPayloadBuilder} from "./payload/quotationPayloadBuilder"
 export function orderRequest(): string {
     const config = new Config("PublicKey", "PrivateKey", "Production");
     return config.env;
