@@ -1,23 +1,22 @@
 import Config from "./config";
-import QuotationPayloadBuilder from "./payload/quotationPayloadBuilder";
-import Quotation from "./response/quotation";
-import Client from "./client";
-export Client;
+// import QuotationPayloadBuilder from "./payload/quotationPayloadBuilder";
+// import Quotation from "./response/quotation";
+
+export { default as ClientModule } from "./client";
+// export * as Config from "./config";
+export { default as Config } from "./config";
+
 export function orderRequest(): string {
     const config = new Config("PublicKey", "PrivateKey", "Production");
     return config.env;
 }
 
-export function cancelOrder(id: number): string a{
+export function cancelOrder(id: number): string {
     return `Cancelled Order with ID: ${id}`;
 }
 
-export function quotationRequest(): Quotation {
-    let quotationPayload = QuotationPaationPayload()
-        .withLanguage("English")
-        .build();
-    let quotaion = Quotation.create(quotationPayload);
-    return quotaion;
-}
-
-
+// export function quotationRequest(): Quotation {
+//     const quotationPayload = new QuotationPayloadBuilder().withLanguage("English").build();
+//     const quotaion = new Quotation(quotationPayload);
+//     return quotaion;
+// }

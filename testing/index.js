@@ -1,45 +1,66 @@
-const delivery_sdk = require("delivery-nodejs-sdk");
+// import Config from "delivery-nodejs-sdk/config";
+// import SDKClient from "delivery-nodejs-sdk";
+// import QuotationPayload from "delivery-nodejs-sdk/payload/quotationPayload";
 
-const config = new Config{
-    key: "ddd"
-}
+// const Config = require("delivery-nodejs-sdk/config");
+const SDKClient = require("delivery-nodejs-sdk");
+// const QuotationPayload = require("delivery-nodejs-sdk/payload/quotationPayload");
 
-class Quotation {
-    public place(params: QuotationPyaload): QuotationResponse {
-        return httpClient.makeCall<QuotationResponse, QuotationPyaload>(params)
-    }
-}
+const main = () => {
+    const sdKClient = new SDKClient.ClientModule(
+        new SDKClient.Config(
+            "2b5ab9e54f8cd1ff3a02823456ab6ac3",
+            "6pVLO8zjywjbSiOe7v4KvPh5LX64Kxn0BHO5VHwF6XIkDln0a2n/JqFBtsd38OBn",
+            "SANDBOX"
+        )
+    );
 
-class QuotationPyaload{}
-class QuotationResponse{}
+    const res = sdKClient.Quotation.create("HK", SDKClient.QuotationPayload());
+    res.then((x) => console.log(JSON.stringify(x, null, 3))).catch((x) =>
+        console.log(JSON.stringify(x, null, 3))
+    );
+};
+main();
 
-class SDKCLient {
-    public Quotation: Quotation // class michal
-    public Order: Order // karebn
-    public Driver: Driver
-    protected Config: Config
+// const config = new Config("", "", "");
 
-    constructor(config: Config) {
-        this.config = config
-        this.Quotation = new Quotation(config);
-        this.Order = new Order(config)
-    }
-}
+// // class Quotation {
+// //     public place(params) {
+// //         return httpClient.makeCall<QuotationResponse, QuotationPyaload>(params);
+// //     }
+// // }
 
-const traveloka = new SDKClient(config)
+// // interface QuotationPyaload {}
+// // interface QuotationResponse {}
 
-quot =  new quotationPayloadBuilder().withSMS(tyrue) // quotationPayload
+// class SDKClient {
+//     // public Quotation; // class michal
+//     // public Order; // karebn
+//     // public Driver;
+//     protected config;
 
-// 1 option
-traveloka.Quotation.
-traveloka.Quotation.place("TW", quotationPayload) // Quotation object. not promise
-traveloka.Order.get("HK", id)
-traveloka.Driver.get(market, id)
+//     constructor(config) {
+//         this.config = config;
+//         this.Quotation = new Quotation(config);
+//         this.Order = new Order(config);
+//     }
+// }
 
+// const traveloka = new SDKClient(config);
 
+// quot = new quotationPayloadBuilder().withSMS(tyrue); // quotationPayload
 
-// new stop = 322332
+// // 1 option
+// traveloka.Quotation.traveloka.Quotation.place("TW", quotationPayload); // Quotation object. not promise
+// traveloka.Order.get("HK", id);
+// traveloka.Driver.get(market, id);
 
-SDKClient.quotationRequest().then((r) => console.log(r));
+// // new stop = 322332
 
-let client = new delivery_sdk.
+// SDKClient.quotationRequest().then((r) => console.log(r));
+
+// // let client = new delivery_sdk.
+
+// cancelOrder(123);
+
+// QuotationHTTPClient.
