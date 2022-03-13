@@ -1,6 +1,6 @@
 const SDKClient = require("delivery-nodejs-sdk");
 
-function placeQuotation() {
+function buildPlaceQuotation() {
     const co = {
         lat: "22.3353139",
         lng: "114.1758402",
@@ -29,7 +29,7 @@ function placeQuotation() {
     return quotationPayload;
 }
 
-function placeOrder(quotation) {
+function buildPlaceOrder(quotation) {
     return SDKClient.OrderPayloadBuilder.orderPayload()
         .withIsPODEnabled(true)
         .withQuotationID(quotation.id)
@@ -60,7 +60,7 @@ const main = async () => {
     try {
         // Create quotation
 
-        const quotationPayload = placeQuotation();
+        const quotationPayload = buildPlaceQuotation();
         const quotation = await sdKClient.Quotation.create("HK", quotationPayload);
 
         // eslint-disable-next-line no-console
@@ -78,7 +78,7 @@ const main = async () => {
 
         // Place order
 
-        const orderPayload = placeOrder(quotation);
+        const orderPayload = buildPlaceOrder(quotation);
 
         const order = await sdKClient.Order.create("HK", orderPayload);
         // eslint-disable-next-line no-console
