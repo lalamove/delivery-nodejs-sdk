@@ -11,13 +11,13 @@ export default class BaseHTTPClient {
         this.config = config;
     }
 
-    protected async makeCall<ResultType, PayloadType>(
+    protected makeCall<PayloadType>(
         market: string,
         path: string,
         body?: PayloadType,
         method: string = "GET"
-    ): Promise<ResultType> {
-        return new Promise<ResultType>((resolve: any, reject: any) => {
+    ): Promise<JSON> {
+        return new Promise<JSON>((resolve, reject) => {
             const options = {
                 host: this.config.host,
                 path,
@@ -37,17 +37,31 @@ export default class BaseHTTPClient {
                 },
             };
 
+            const getCircularReplacer = () => {
+                const seen = new WeakSet();
+                return (key: any, value: any) => {
+                    if (typeof value === "object" && value !== null) {
+                        if (seen.has(value)) {
+                            return;
+                        }
+                        seen.add(value);
+                    }
+                    // eslint-disable-next-line consistent-return
+                    return value;
+                };
+            };
+
             const request = https.request(options, (res: any) => {
                 if (res.statusCode > 299) {
                     // eslint-disable-next-line no-console
                     console.error(
-                        `Did not get a success response from the server. Code: ${res.statusCode}, Resp ${res}`
+                        `Did not get a success response from the server. Code: ${
+                            res.statusCode
+                        }, Resp ${JSON.stringify(res, getCircularReplacer())}`
                     );
                     res.resume();
                     return;
                 }
-
-                console.log(JSON.stringify(body, null, 3));
 
                 let data = "";
 
@@ -56,7 +70,7 @@ export default class BaseHTTPClient {
                 });
 
                 res.on("close", () => {
-                    resolve(data);
+                    resolve(JSON.parse(data).data);
                 });
             });
 
