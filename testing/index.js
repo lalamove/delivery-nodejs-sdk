@@ -29,6 +29,25 @@ function placeQuotation() {
     return quotationPayload;
 }
 
+function placeOrder(quotation) {
+    return SDKClient.OrderPayloadBuilder.orderPayload()
+        .withIsPODEnabled(true)
+        .withQuotationID(quotation.quotationId)
+        .withSender({
+            stopId: quotation.stops[0].stopId,
+            name: "aaa",
+            phone: "+85256847364",
+        })
+        .withRecipients([
+            {
+                stopId: quotation.stops[1].stopId,
+                name: "bbb",
+                phone: "+85256847364",
+            },
+        ])
+        .build();
+}
+
 const main = async () => {
     const sdKClient = new SDKClient.ClientModule(
         new SDKClient.Config(
@@ -40,13 +59,53 @@ const main = async () => {
 
     const quotationPayload = placeQuotation();
 
+    let quotation;
+
     try {
-        const res = await sdKClient.Quotation.create("HK", quotationPayload);
+        quotation = await sdKClient.Quotation.create("HK", quotationPayload);
+
         // eslint-disable-next-line no-console
-        console.log(JSON.stringify(res, null, 4));
+        console.log(JSON.stringify("=== 1. CREATE QUOTATION ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(quotation, null, 4));
+
+        try {
+            const orderPayload = placeOrder(quotation);
+
+            const order = await sdKClient.Order.create("HK", orderPayload);
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify("=== 2. PLACE ORDER ==="));
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(order, null, 4));
+
+            try {
+                const orderDetail = await sdKClient.Order.retrieve("HK", order.orderId);
+                // eslint-disable-next-line no-console
+                console.log(JSON.stringify("=== 3. GET ORDER DETAIL ==="));
+                // eslint-disable-next-line no-console
+                console.log(JSON.stringify(orderDetail, null, 4));
+
+                try {
+                    const orderCancelled = await sdKClient.Order.cancel("HK", order.orderId);
+                    // eslint-disable-next-line no-console
+                    console.log(JSON.stringify("=== 4. CANCELL ORDER ==="));
+                    // eslint-disable-next-line no-console
+                    console.log(orderCancelled);
+                } catch (e) {
+                    // eslint-disable-next-line no-console
+                    console.log("Ops... something went wrong with cancelling Order. ", e.message);
+                }
+            } catch (e) {
+                // eslint-disable-next-line no-console
+                console.log("Ops... something went wrong with Order Detail. ", e.message);
+            }
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log("Ops... something went wrong with Order. ", e.message);
+        }
     } catch (e) {
         // eslint-disable-next-line no-console
-        console.log("Ops... something went wrong. ", e.message);
+        console.log("Ops... something went wrong with Quotation. ", e.message);
     }
 };
 

@@ -31,38 +31,13 @@ export default class BaseHTTPClient {
                         this.config,
                         method,
                         path,
-                        `{"data": ${JSON.stringify(body)}}`
+                        body ? `{"data": ${JSON.stringify(body)}}` : undefined
                     )}`,
                     Market: market,
                 },
             };
 
-            const getCircularReplacer = () => {
-                const seen = new WeakSet();
-                return (key: any, value: any) => {
-                    if (typeof value === "object" && value !== null) {
-                        if (seen.has(value)) {
-                            return;
-                        }
-                        seen.add(value);
-                    }
-                    // eslint-disable-next-line consistent-return
-                    return value;
-                };
-            };
-
             const request = https.request(options, (res: any) => {
-                if (res.statusCode > 299) {
-                    // eslint-disable-next-line no-console
-                    console.error(
-                        `Did not get a success response from the server. Code: ${
-                            res.statusCode
-                        }, Resp ${JSON.stringify(res, getCircularReplacer())}`
-                    );
-                    res.resume();
-                    return;
-                }
-
                 let data = "";
 
                 res.on("data", (chunk: any) => {
@@ -70,11 +45,19 @@ export default class BaseHTTPClient {
                 });
 
                 res.on("close", () => {
-                    resolve(JSON.parse(data).data);
+                    if (res.statusCode > 299) {
+                        reject(new Error("Problem with the request."));
+                    }
+
+                    if (res.statusCode === 204) {
+                        resolve(JSON.parse("{}"));
+                    } else {
+                        resolve(JSON.parse(data).data);
+                    }
                 });
             });
 
-            if (method !== "GET") {
+            if (body) {
                 request.write(`{"data": ${JSON.stringify(body)}}`);
             }
 
