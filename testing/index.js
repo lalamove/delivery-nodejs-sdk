@@ -57,14 +57,11 @@ const main = async () => {
         )
     );
 
-    const quotationPayload = placeQuotation();
-
-    let quotation;
-
     try {
         // Create quotation
 
-        quotation = await sdKClient.Quotation.create("HK", quotationPayload);
+        const quotationPayload = placeQuotation();
+        const quotation = await sdKClient.Quotation.create("HK", quotationPayload);
 
         // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== 1. CREATE QUOTATION ==="));
