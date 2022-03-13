@@ -41,15 +41,14 @@ export default class APIError extends Error {
         this.date = new Date();
     }
 
-    getError(): string | undefined {
+    getError(): IError {
         if (this.errors === undefined) {
-            return "unexpected error";
+            return {};
         }
         if (Array.isArray(this.errors)) {
             const e = <IError[]>this.errors;
-            return e[0].message;
+            return e[0];
         }
-        const e = <IError>this.errors;
-        return e.message;
+        return this.errors;
     }
 }
