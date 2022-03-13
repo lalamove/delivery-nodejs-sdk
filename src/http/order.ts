@@ -7,9 +7,11 @@ export default class OrderHTTPClient extends BaseHTTPClient {
         return new Promise<IOrder>((resolve, reject) => {
             const response = this.makeCall<OrderPayload>(market, path, body, "POST");
             response
-                .then((d) => {
-                    const order: IOrder = <IOrder>(<unknown>d);
-                    resolve(order);
+                .then((d: any) => {
+                    const order = d;
+                    order.id = order.orderId;
+                    delete order.orderId;
+                    resolve(<IOrder>(<unknown>order));
                 })
                 .catch((e) => {
                     reject(e);
@@ -21,9 +23,11 @@ export default class OrderHTTPClient extends BaseHTTPClient {
         return new Promise<IOrder>((resolve, reject) => {
             const response = this.makeCall<null>(market, path);
             response
-                .then((d) => {
-                    const order: IOrder = <IOrder>(<unknown>d);
-                    resolve(order);
+                .then((d: any) => {
+                    const order = d;
+                    order.id = order.orderId;
+                    delete order.orderId;
+                    resolve(<IOrder>(<unknown>order));
                 })
                 .catch((e) => {
                     reject(e);

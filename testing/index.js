@@ -62,6 +62,8 @@ const main = async () => {
     let quotation;
 
     try {
+        // Create quotation
+
         quotation = await sdKClient.Quotation.create("HK", quotationPayload);
 
         // eslint-disable-next-line no-console
@@ -69,43 +71,34 @@ const main = async () => {
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(quotation, null, 4));
 
-        try {
-            const orderPayload = placeOrder(quotation);
+        // Place order
 
-            const order = await sdKClient.Order.create("HK", orderPayload);
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify("=== 2. PLACE ORDER ==="));
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify(order, null, 4));
+        const orderPayload = placeOrder(quotation);
 
-            try {
-                const orderDetail = await sdKClient.Order.retrieve("HK", order.orderId);
-                // eslint-disable-next-line no-console
-                console.log(JSON.stringify("=== 3. GET ORDER DETAIL ==="));
-                // eslint-disable-next-line no-console
-                console.log(JSON.stringify(orderDetail, null, 4));
+        const order = await sdKClient.Order.create("HK", orderPayload);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== 2. PLACE ORDER ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(order, null, 4));
 
-                try {
-                    const orderCancelled = await sdKClient.Order.cancel("HK", order.orderId);
-                    // eslint-disable-next-line no-console
-                    console.log(JSON.stringify("=== 4. CANCELL ORDER ==="));
-                    // eslint-disable-next-line no-console
-                    console.log(orderCancelled);
-                } catch (e) {
-                    // eslint-disable-next-line no-console
-                    console.log("Ops... something went wrong with cancelling Order. ", e.message);
-                }
-            } catch (e) {
-                // eslint-disable-next-line no-console
-                console.log("Ops... something went wrong with Order Detail. ", e.message);
-            }
-        } catch (e) {
-            // eslint-disable-next-line no-console
-            console.log("Ops... something went wrong with Order. ", e.message);
-        }
+        // Get order
+
+        const orderDetail = await sdKClient.Order.retrieve("HK", order.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== 3. GET ORDER DETAIL ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(orderDetail, null, 4));
+
+        // Cancell order
+
+        const orderCancelled = await sdKClient.Order.cancel("HK", order.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== 4. CANCELL ORDER ==="));
+        // eslint-disable-next-line no-console
+        console.log(orderCancelled);
     } catch (e) {
         // eslint-disable-next-line no-console
-        console.log("Ops... something went wrong with Quotation. ", e.message);
+        console.log("Ops... something went wrong. ", e.message);
     }
 };
 

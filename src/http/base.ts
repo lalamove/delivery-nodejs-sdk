@@ -46,7 +46,7 @@ export default class BaseHTTPClient {
 
                 res.on("close", () => {
                     if (res.statusCode > 299) {
-                        reject(new Error("Problem with the request."));
+                        reject(new Error(`Problem with the request [${method}] ${path}.`));
                     }
 
                     if (res.statusCode === 204) {
