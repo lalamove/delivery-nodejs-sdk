@@ -1,8 +1,11 @@
 import Base from "./base";
-import { default as DriverResponse } from "./response/driver";
+import { IDriver } from "./response/driver";
+import DriverHTTPClient from "./http/driver";
 
 export default class Driver extends Base {
-    retrieve(market: string, id: string, orderId: string): DriverResponse {
-        return new DriverResponse();
+    async retrieve(market: string, id: string, orderId: string): Promise<IDriver> {
+        const httpClient = new DriverHTTPClient(this.config);
+        const response = await httpClient.get(market, `/v3/orders/${orderId}/drivers/${id}`);
+        return response;
     }
 }

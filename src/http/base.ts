@@ -1,6 +1,7 @@
 import https from "https";
 import Config from "../config";
 import signRequest from "../auth";
+import APIError from "../error";
 
 export default class BaseHTTPClient {
     private http = https;
@@ -46,14 +47,21 @@ export default class BaseHTTPClient {
 
                 res.on("close", () => {
                     if (res.statusCode > 299) {
-                        reject(new Error(`Problem with the request [${method}] ${path}.`));
+                        reject(
+                            new APIError(
+                                res.statusCode,
+                                data,
+                                `Problem with the request [${method}] ${path}. Status code: ${res.statusCode}`
+                            )
+                        );
+                        return;
                     }
 
-                    if (res.statusCode === 204) {
+                    if (data.length === 0) {
                         resolve(JSON.parse("{}"));
-                    } else {
-                        resolve(JSON.parse(data).data);
+                        return;
                     }
+                    resolve(JSON.parse(data).data);
                 });
             });
 
