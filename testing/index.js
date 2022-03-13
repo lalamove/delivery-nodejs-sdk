@@ -32,7 +32,7 @@ function placeQuotation() {
 function placeOrder(quotation) {
     return SDKClient.OrderPayloadBuilder.orderPayload()
         .withIsPODEnabled(true)
-        .withQuotationID(quotation.quotationId)
+        .withQuotationID(quotation.id)
         .withSender({
             stopId: quotation.stops[0].stopId,
             name: "aaa",
@@ -68,13 +68,21 @@ const main = async () => {
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(quotation, null, 4));
 
+        // Get Quotation
+
+        const quotDetail = await sdKClient.Quotation.retrieve("HK", quotation.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== 2. GET QUOTATION DETAILS ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(quotDetail, null, 4));
+
         // Place order
 
         const orderPayload = placeOrder(quotation);
 
         const order = await sdKClient.Order.create("HK", orderPayload);
         // eslint-disable-next-line no-console
-        console.log(JSON.stringify("=== 2. PLACE ORDER ==="));
+        console.log(JSON.stringify("=== 3. PLACE ORDER ==="));
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(order, null, 4));
 
@@ -82,7 +90,7 @@ const main = async () => {
 
         const orderDetail = await sdKClient.Order.retrieve("HK", order.id);
         // eslint-disable-next-line no-console
-        console.log(JSON.stringify("=== 3. GET ORDER DETAIL ==="));
+        console.log(JSON.stringify("=== 4. GET ORDER DETAIL ==="));
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(orderDetail, null, 4));
 
@@ -90,7 +98,7 @@ const main = async () => {
 
         const orderCancelled = await sdKClient.Order.cancel("HK", order.id);
         // eslint-disable-next-line no-console
-        console.log(JSON.stringify("=== 4. CANCELL ORDER ==="));
+        console.log(JSON.stringify("=== 5. CANCELL ORDER ==="));
         // eslint-disable-next-line no-console
         console.log(orderCancelled);
     } catch (e) {
