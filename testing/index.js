@@ -94,6 +94,15 @@ const main = async () => {
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(orderDetail, null, 4));
 
+        // Add Priority Fee
+
+        const priorityFeeStatus = await sdKClient.Order.addPriorityFee("HK", order.id, "15");
+        const orderDetailWithPriorityFee = await sdKClient.Order.retrieve("HK", order.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== GET ORDER DETAILS WITH PRIORITY FEE ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(orderDetailWithPriorityFee, null, 4));
+
         // Get Driver detail
 
         // eslint-disable-next-line no-console
