@@ -37,7 +37,6 @@ export default class BaseHTTPClient {
                     Market: market,
                 },
             };
-
             const request = https.request(options, (res: any) => {
                 let data = "";
 
@@ -66,6 +65,7 @@ export default class BaseHTTPClient {
             });
 
             if (body) {
+                request.useChunkedEncodingByDefault = true;
                 request.write(`{"data": ${JSON.stringify(body)}}`);
             }
 

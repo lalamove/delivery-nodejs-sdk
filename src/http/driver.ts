@@ -22,4 +22,18 @@ export default class DriverHTTPClient extends BaseHTTPClient {
                 });
         });
     }
+
+    delete(market: string, path: string, reason: object): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            const response = this.makeCall<object>(market, path, reason, "DELETE");
+            response
+                .then(() => {
+                    resolve(true);
+                })
+                .catch((e) => {
+                    reject(e);
+                });
+        });
+    }
+
 }
