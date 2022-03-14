@@ -8,7 +8,7 @@ function buildPlaceQuotation() {
 
     const co2 = {
         lat: "22.3203648",
-        lng: "114.169773", // 114.169773
+        lng: "-", // 114.169773
     };
 
     const stop1 = {
