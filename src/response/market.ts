@@ -1,6 +1,6 @@
-import City from "./city";
+import {ICity} from "./city";
 
 export interface IMarket {
     id: string;
-    cities: City[];
+    cities: ICity[];
 }

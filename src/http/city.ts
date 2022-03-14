@@ -1,6 +1,6 @@
 import BaseHTTPClient from "./base";
 import {IMarket} from "../response/market";
-import ICity from "../response/city";
+import {ICity} from "../response/city";
 
 export default class CityHTTPClient extends BaseHTTPClient {
     get(market: string, id: string, path: string): Promise<ICity> {
