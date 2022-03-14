@@ -60,56 +60,57 @@ const main = async () => {
     try {
         // Create quotation
 
-        // const quotationPayload = buildPlaceQuotation();
-        // const quotation = await sdKClient.Quotation.create("HK", quotationPayload);
+        const quotationPayload = buildPlaceQuotation();
+        const quotation = await sdKClient.Quotation.create("HK", quotationPayload);
 
         // eslint-disable-next-line no-console
-        // console.log(JSON.stringify("=== CREATE QUOTATION ==="));
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify(quotation, null, 4));
+        console.log(JSON.stringify("=== CREATE QUOTATION ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(quotation, null, 4));
 
-        // // Get Quotation
-        //
-        // const quotDetail = await sdKClient.Quotation.retrieve("HK", quotation.id);
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify("=== GET QUOTATION DETAILS ==="));
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify(quotDetail, null, 4));
-        //
-        // // Place order
-        //
-        // const orderPayload = buildPlaceOrder(quotation);
-        //
-        // const order = await sdKClient.Order.create("HK", orderPayload);
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify("=== PLACE ORDER ==="));
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify(order, null, 4));
-        //
-        // // Get order
-        //
-        // const orderDetail = await sdKClient.Order.retrieve("HK", order.id);
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify("=== GET ORDER DETAIL ==="));
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify(orderDetail, null, 4));
+        // Get Quotation
+
+        const quotDetail = await sdKClient.Quotation.retrieve("HK", quotation.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== GET QUOTATION DETAILS ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(quotDetail, null, 4));
+
+        // Place order
+
+        const orderPayload = buildPlaceOrder(quotation);
+
+        const order = await sdKClient.Order.create("HK", orderPayload);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== PLACE ORDER ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(order, null, 4));
+
+        // Get order
+
+        const orderDetail = await sdKClient.Order.retrieve("HK", order.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== GET ORDER DETAIL ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(orderDetail, null, 4));
 
         // Get Driver detail
 
         // eslint-disable-next-line no-console
-        // console.log(JSON.stringify("=== GET Driver DETAIL ==="));
-        // try {
-        //     const driverDetail = await sdKClient.Driver.retrieve("HK", "93965", "136970806262");
-        //     // eslint-disable-next-line no-console
-        //     console.log(JSON.stringify(driverDetail, null, 4));
-        // } catch (e) {
-        //     // eslint-disable-next-line no-console
-        //     console.log(e.message);
-        // }
+        console.log(JSON.stringify("=== GET Driver DETAIL ==="));
+        try {
+            const driverDetail = await sdKClient.Driver.retrieve("HK", "93965", "136970806262");
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(driverDetail, null, 4));
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e.message);
+        }
 
+        // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== Cancel Driver ==="));
         try {
-            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "DRIVER_LATE");
+            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "NO_NEED");
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(status, null, 4));
         } catch (e) {
@@ -117,23 +118,24 @@ const main = async () => {
             console.log(e.message);
         }
 
-        // console.log(JSON.stringify("=== GET Driver DETAIL After cancel==="));
-        // try {
-        //     const driverDetail = await sdKClient.Driver.retrieve("HK", "93965", "136970806262");
-        //     // eslint-disable-next-line no-console
-        //     console.log(JSON.stringify(driverDetail, null, 4));
-        // } catch (e) {
-        //     // eslint-disable-next-line no-console
-        //     console.log(e.message);
-        // }
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== GET Driver DETAIL After cancel==="));
+        try {
+            const driverDetail = await sdKClient.Driver.retrieve("HK", "93965", "136970806262");
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(driverDetail, null, 4));
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e.message);
+        }
 
         // Cancell order
 
-        // const orderCancelled = await sdKClient.Order.cancel("HK", order.id);
-        // // eslint-disable-next-line no-console
-        // console.log(JSON.stringify("=== CANCELL ORDER ==="));
-        // // eslint-disable-next-line no-console
-        // console.log(orderCancelled);
+        const orderCancelled = await sdKClient.Order.cancel("HK", order.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== CANCELL ORDER ==="));
+        // eslint-disable-next-line no-console
+        console.log(orderCancelled);
     } catch (e) {
         // eslint-disable-next-line no-console
         console.log("Ops... something went wrong. ", e.message);

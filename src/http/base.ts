@@ -37,7 +37,6 @@ export default class BaseHTTPClient {
                     Market: market,
                 },
             };
-            console.log(options);
             const request = https.request(options, (res: any) => {
                 let data = "";
 
@@ -46,18 +45,16 @@ export default class BaseHTTPClient {
                 });
 
                 res.on("close", () => {
-                    console.log(JSON.stringify(res.headers, null, 4));
-                    // if (res.statusCode > 299) {
-                    //     reject(
-                    //         new APIError(
-                    //             res.statusCode,
-                    //             data,
-                    //             `Problem with the request [${method}] ${path}. Status code: ${res.statusCode}`
-                    //         )
-                    //     );
-                    //     return;
-                    // }
-                    console.log(JSON.stringify(data, null, 4));
+                    if (res.statusCode > 299) {
+                        reject(
+                            new APIError(
+                                res.statusCode,
+                                data,
+                                `Problem with the request [${method}] ${path}. Status code: ${res.statusCode}`
+                            )
+                        );
+                        return;
+                    }
 
                     if (data.length === 0) {
                         resolve(JSON.parse("{}"));
@@ -70,7 +67,6 @@ export default class BaseHTTPClient {
             if (body) {
                 request.useChunkedEncodingByDefault = true;
                 request.write(`{"data": ${JSON.stringify(body)}}`);
-                console.log(`{"data": ${JSON.stringify(body)}}`);
             }
 
             request.end();

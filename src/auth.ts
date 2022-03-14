@@ -8,14 +8,10 @@ export default function signRequest(
     body?: string
 ): string {
     const time = new Date().getTime().toString();
-    console.log("====Auth body");
-    console.log(body);
     const rawSignature = body
         ? `${time}\r\n${method}\r\n${path}\r\n\r\n${body}`
         : `${time}\r\n${method}\r\n${path}\r\n\r\n`;
-    if (body){
-        console.log(rawSignature);
-    }
+
     const SIGNATURE = CryptoJS.HmacSHA256(rawSignature, config.privateKey).toString();
     return SIGNATURE;
 }
