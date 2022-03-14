@@ -1,6 +1,5 @@
 import BaseHTTPClient from "./base";
-import {IMarket} from "../response/market";
-import {ICity} from "../response/city";
+import { ICity } from "../response/city";
 
 export default class CityHTTPClient extends BaseHTTPClient {
     get(market: string, id: string, path: string): Promise<ICity> {
@@ -8,28 +7,30 @@ export default class CityHTTPClient extends BaseHTTPClient {
             const response = this.makeCall<null>(market, path);
             response
                 .then((d: any) => {
-                    for (let i = 0; i < d.length; i++){
-                        let curr = d[i];
+                    const dt = d;
+                    // eslint-disable-next-line no-plusplus
+                    for (let i = 0; i < d.length; i++) {
+                        const curr = dt[i];
                         curr.id = curr.locode;
                         delete curr.locode;
-                        d[i] = curr;
+                        dt[i] = curr;
                     }
                     const IMarket = {
                         id: market,
-                        cities: d
+                        cities: dt,
                     };
                     let found = false;
-                    for (let i = 0; i < IMarket.cities.length; i++){
-                        let currCity = IMarket.cities[i];
-                        if (currCity.id == id) {
-                            resolve(<ICity>(<unknown>currCity))
+                    // eslint-disable-next-line no-plusplus
+                    for (let i = 0; i < IMarket.cities.length; i++) {
+                        const currCity = IMarket.cities[i];
+                        if (currCity.id === id) {
+                            resolve(<ICity>(<unknown>currCity));
                             found = true;
                         }
                     }
                     if (!found) {
                         throw new Error("No such city");
                     }
-
                 })
                 .catch((e) => {
                     reject(e);
