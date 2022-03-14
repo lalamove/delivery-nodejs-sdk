@@ -23,4 +23,10 @@ export default class Order extends Base {
         await httpClient.delete(market, `${orderPath}/${orderId}`);
         return true;
     }
+
+    async addPriorityFee(market: string, orderId: string, fee: string): Promise<boolean> {
+        const httpClient = new OrderHTTPClient(this.config);
+        await httpClient.patch(market, `${orderPath}/${orderId}`, {priorityFee: fee});
+        return true
+    }
 }

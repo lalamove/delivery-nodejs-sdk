@@ -47,4 +47,17 @@ export default class OrderHTTPClient extends BaseHTTPClient {
                 });
         });
     }
+
+    patch(market: string, path: string, priorityFee: object): Promise<boolean> {
+        return new Promise<boolean>((resolve, reject) => {
+            const response = this.makeCall<object>(market, path, priorityFee, "PATCH");
+            response
+                .then(() => {
+                    resolve(true);
+                })
+                .catch((e) => {
+                    reject(e);
+                });
+        });
+    }
 }
