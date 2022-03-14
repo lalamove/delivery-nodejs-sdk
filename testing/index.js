@@ -60,8 +60,8 @@ const main = async () => {
     try {
         // Create quotation
 
-        const quotationPayload = buildPlaceQuotation();
-        const quotation = await sdKClient.Quotation.create("HK", quotationPayload);
+        // const quotationPayload = buildPlaceQuotation();
+        // const quotation = await sdKClient.Quotation.create("HK", quotationPayload);
 
         // eslint-disable-next-line no-console
         // console.log(JSON.stringify("=== CREATE QUOTATION ==="));
@@ -109,7 +109,7 @@ const main = async () => {
 
         console.log(JSON.stringify("=== Cancel Driver ==="));
         try {
-            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "NO_NEED");
+            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "DRIVER_LATE");
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(status, null, 4));
         } catch (e) {

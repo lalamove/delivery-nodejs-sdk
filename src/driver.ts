@@ -12,7 +12,7 @@ export default class Driver extends Base {
 
     async cancel(market: string, id: string, orderId: string, reason: string): Promise<boolean> {
         const httpClient = new DriverHTTPClient(this.config);
-        await httpClient.delete(market, `/v3/orders/${orderId}/drivers/${id}?hello=world`, {reason: reason});
+        await httpClient.delete(market, `/v3/orders/${orderId}/drivers/${id}`, {reason: reason});
         return true;
     }
 }

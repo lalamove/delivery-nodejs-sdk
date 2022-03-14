@@ -68,6 +68,7 @@ export default class BaseHTTPClient {
             });
 
             if (body) {
+                request.useChunkedEncodingByDefault = true;
                 request.write(`{"data": ${JSON.stringify(body)}}`);
                 console.log(`{"data": ${JSON.stringify(body)}}`);
             }
