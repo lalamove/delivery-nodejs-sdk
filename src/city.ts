@@ -1,5 +1,4 @@
-import Config from "./config";
-import ICity, { default as CityResponse } from "./response/city";
+import {ICity} from "./response/city";
 import Base from "./base";
 import CityHTTPClient from "./http/city";
 
