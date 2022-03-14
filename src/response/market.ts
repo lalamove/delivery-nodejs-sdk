@@ -1,4 +1,4 @@
-import {ICity} from "./city";
+import { ICity } from "./city";
 
 export interface IMarket {
     id: string;
