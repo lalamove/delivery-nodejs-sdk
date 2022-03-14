@@ -71,6 +71,7 @@ const main = async () => {
         // Get Quotation
 
         const quotDetail = await sdKClient.Quotation.retrieve("HK", quotation.id);
+        // const quotDetail = await sdKClient.Quotation.retrieve("HK", "123");
         // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== GET QUOTATION DETAILS ==="));
         // eslint-disable-next-line no-console
@@ -88,11 +89,18 @@ const main = async () => {
 
         // Get order
 
-        const orderDetail = await sdKClient.Order.retrieve("HK", order.id);
         // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== GET ORDER DETAIL ==="));
-        // eslint-disable-next-line no-console
-        console.log(JSON.stringify(orderDetail, null, 4));
+
+        try {
+            // const orderDetail = await sdKClient.Order.retrieve("HK", order.id);
+            const orderDetail = await sdKClient.Order.retrieve("HK", "123");
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(orderDetail, null, 4));
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e.message);
+        }
 
         // Get Driver detail
 
@@ -107,13 +115,19 @@ const main = async () => {
             console.log(e.message);
         }
 
-        // Cancell order
+        // Cancel order
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== CANCEL ORDER ==="));
+        try {
+            // const orderCancelled = await sdKClient.Order.cancel("HK", order.id);
+            const orderCancelled = await sdKClient.Order.cancel("HK", "123");
 
-        const orderCancelled = await sdKClient.Order.cancel("HK", order.id);
-        // eslint-disable-next-line no-console
-        console.log(JSON.stringify("=== CANCELL ORDER ==="));
-        // eslint-disable-next-line no-console
-        console.log(orderCancelled);
+            // eslint-disable-next-line no-console
+            console.log(orderCancelled);
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e.message);
+        }
     } catch (e) {
         // eslint-disable-next-line no-console
         console.log("Ops... something went wrong. ", e.message);

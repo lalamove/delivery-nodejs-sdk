@@ -15,17 +15,7 @@ export default class QuotationHTTPClient extends BaseHTTPClient {
                     resolve(<IQuotation>(<unknown>q));
                 })
                 .catch((e) => {
-                    if (e instanceof APIError) {
-                        if (e.httpStatus === 422 && e.errors) {
-                            const err = e.getError();
-                            const what = err.detail?.replace("/data/", "");
-                            const why = err.message;
-                            reject(new Error(`Problem with ${what} because of ${why}`));
-
-                            return;
-                        }
-                    }
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }
@@ -41,7 +31,8 @@ export default class QuotationHTTPClient extends BaseHTTPClient {
                     resolve(<IQuotation>(<unknown>q));
                 })
                 .catch((e) => {
-                    reject(e);
+                    // reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }

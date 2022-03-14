@@ -14,7 +14,8 @@ export default class OrderHTTPClient extends BaseHTTPClient {
                     resolve(<IOrder>(<unknown>order));
                 })
                 .catch((e) => {
-                    reject(e);
+                    // reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }
@@ -30,7 +31,8 @@ export default class OrderHTTPClient extends BaseHTTPClient {
                     resolve(<IOrder>(<unknown>order));
                 })
                 .catch((e) => {
-                    reject(e);
+                    // reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }
@@ -43,7 +45,7 @@ export default class OrderHTTPClient extends BaseHTTPClient {
                     resolve(true);
                 })
                 .catch((e) => {
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }

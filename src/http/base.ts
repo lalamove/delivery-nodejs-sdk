@@ -49,6 +49,8 @@ export default class BaseHTTPClient {
                     if (res.statusCode > 299) {
                         reject(
                             new APIError(
+                                path,
+                                method,
                                 res.statusCode,
                                 data,
                                 `Problem with the request [${method}] ${path}. Status code: ${res.statusCode}`
