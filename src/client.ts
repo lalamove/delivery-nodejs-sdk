@@ -7,10 +7,15 @@ import Config from "./config";
 
 export default class Client {
     Config: Config;
+
     Quotation: Quotation;
+
     Order: Order;
+
     Driver: Driver;
+
     Market: Market;
+
     City: City;
 
     constructor(config: Config) {
