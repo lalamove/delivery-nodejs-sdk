@@ -18,7 +18,7 @@ You can specify the environment in a config object `SDKClient.Config`. By defaul
 ```
     const SDKClient = require("delivery-nodejs-sdk");
 
-    const sdKClient = new SDKClient.ClientModule(
+    const sdkClient = new SDKClient.ClientModule(
         new SDKClient.Config(
             "public_key",
             "secret_key",
@@ -31,13 +31,13 @@ You can specify the environment in a config object `SDKClient.Config`. By defaul
 
 ## Quotation
 
-`sdKClient.Quotation`
+`sdkClient.Quotation`
 
 ### Create quotation
 
 To create new quotation for your order call
 
-`sdKClient.Quotation.create(market: string, quotationPayload: QuotationPayload): Promise<IQuotation>;`
+`sdkClient.Quotation.create(market: string, quotationPayload: QuotationPayload): Promise<IQuotation>;`
 
 function.
 
@@ -73,7 +73,7 @@ You can import `SDKClient.QuotationPayloadBuilder`, a helper function that will 
         .build();
 
 
-    await sdKClient.Quotation.create("HK", quotationPayload);
+    await sdkClient.Quotation.create("HK", quotationPayload);
 ```
 
 #### Response
@@ -253,14 +253,59 @@ interface IOrder {
 
 ## Driver
 
+`sdkClient.Driver`
+
 ### Retrieve driver
+
+To retrieve driver details for your order call
+
+`sdkClient.Driver.retrieve(market, driverId, orderID)`
+
+function.
+
+You can get `driverId` from order details when a driver picks up the order. The resulting object that will be returned by the function above is as follows:
+
+```
+{
+    "driverId": "93965",
+    "name": "Driver's Name'",
+    "phone": "+85210002001",
+    "plateNumber": "**T-00*",
+    "photo": "www.example.com/photo"
+}
+
+```
 
 ### Change driver
 
+To change the driver for your order call
+
+`sdkClient.Driver.cancel(market, driverId, orderID)`
+
+function.
+
+You can get `driverId` from order details when a driver picks up the order. The return value of the function above is as follows:
+
+```
+true 
+```
+
 ## Market
 
+A market is a mostly synonymous to country. This SDK allows you to get all the service types in all cities in the specified market
 ### Retrieve market
+
+To retrieve all cities with their corresponding service types in a specific market call
+
+`sdkClient.Market.retrieve(market)`
 
 ## City
 
+`sdkClient.City`
+
 ### Retrieve city
+
+To retrieve service types for a specific city
+`sdkClient.City.retrieve(market, id)`
+
+The `id` param is a city identifier. You can see different city codes by calling `retrieve.Market`
