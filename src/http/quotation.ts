@@ -30,7 +30,7 @@ export default class QuotationHTTPClient extends BaseHTTPClient {
                     resolve(<IQuotation>(<unknown>q));
                 })
                 .catch((e) => {
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }

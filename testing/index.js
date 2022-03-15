@@ -8,7 +8,7 @@ function buildPlaceQuotation() {
 
     const co2 = {
         lat: "22.3203648",
-        lng: "-", // 114.169773
+        lng: "114.169773", // 114.169773
     };
 
     const stop1 = {
@@ -57,6 +57,15 @@ const main = async () => {
         )
     );
 
+    //Invalid Credentials
+    // const sdKClient = new SDKClient.ClientModule(
+    //     new SDKClient.Config(
+    //         "accb779492b04ff78f602b57577a6d82",
+    //         "m4njoumtmwIFWrbfK5UkemOWHQWh1MgZQpBtrHVm9FtD1LkeCN/ty1iMWKintfUt",
+    //         "sandbox"
+    //     )
+    // );
+
     try {
         // Create quotation
 
@@ -70,9 +79,10 @@ const main = async () => {
 
         // Get Quotation
 
-        const quotDetail = await sdKClient.Quotation.retrieve("HK", quotation.id);
         // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== GET QUOTATION DETAILS ==="));
+        const quotDetail = await sdKClient.Quotation.retrieve("HK", quotation.id);
+        // const quotDetail = await sdKClient.Quotation.retrieve("HK", "123");
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(quotDetail, null, 4));
 
@@ -119,7 +129,7 @@ const main = async () => {
         // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== Cancel Driver ==="));
         try {
-            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "NO_NEED");
+            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "DRIVER_LATE");
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(status, null, 4));
         } catch (e) {
@@ -147,7 +157,7 @@ const main = async () => {
         console.log(orderCancelled);
     } catch (e) {
         // eslint-disable-next-line no-console
-        console.log("Ops... something went wrong. ", e.message);
+        console.log("Oops... something went wrong. ", e.message);
     }
 };
 

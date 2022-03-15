@@ -1,4 +1,3 @@
-import APIError from "../error";
 import { IDriver } from "../response/driver";
 import BaseHTTPClient from "./base";
 
@@ -11,14 +10,7 @@ export default class DriverHTTPClient extends BaseHTTPClient {
                     resolve(<IDriver>(<unknown>d));
                 })
                 .catch((e) => {
-                    if (e instanceof APIError) {
-                        if (e.httpStatus === 404) {
-                            reject(new Error("Driver not found"));
-                            return;
-                        }
-                    }
-
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }
@@ -31,7 +23,7 @@ export default class DriverHTTPClient extends BaseHTTPClient {
                     resolve(true);
                 })
                 .catch((e) => {
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }

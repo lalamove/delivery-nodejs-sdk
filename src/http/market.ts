@@ -22,7 +22,7 @@ export default class MarketHTTPClient extends BaseHTTPClient {
                     resolve(<IMarket>(<unknown>IMarket));
                 })
                 .catch((e) => {
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }

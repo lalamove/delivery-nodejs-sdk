@@ -52,7 +52,7 @@ export default class BaseHTTPClient {
                                 defineCallerModule(path, method),
                                 res.statusCode,
                                 data,
-                                `Problem with the request [${method}] ${path}. Status code: ${res.statusCode}`
+                                `Something went wrong with your request.`
                             )
                         );
                         return;

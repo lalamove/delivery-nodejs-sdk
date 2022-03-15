@@ -61,6 +61,10 @@ export default class APIError extends Error {
             return this.message;
         }
 
+        if (err.httpStatus === 401) {
+            return "Please verify if you have made the request with the right credentials.";
+        }
+
         if (err.httpStatus === 429) {
             return "You need to calm down. You hit the rate limit.";
         }
@@ -71,7 +75,7 @@ export default class APIError extends Error {
             }
         }
 
-        if (err.callerModule === CallerModule.ChangeDriver) {
+        if (err.callerModule === CallerModule.ChangeDriver || err.callerModule === CallerModule.GetDriver) {
             if (err.httpStatus === 404) {
                 return "Driver not found.";
             }
@@ -83,6 +87,12 @@ export default class APIError extends Error {
             }
         }
 
+        if (err.callerModule === CallerModule.GetQuotation) {
+            if (err.httpStatus === 422 && e.id === "ERR_INVALID_QUOTATION_ID") {
+                return "Quotation not found.";
+            }
+        }
+
         if (e.message) {
             return e.message;
         }
@@ -91,7 +101,7 @@ export default class APIError extends Error {
             return e.id;
         }
 
-        return "Uknown error";
+        return "Unknown error";
     }
 
     getError(): IError {
