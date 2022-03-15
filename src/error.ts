@@ -83,7 +83,15 @@ export default class APIError extends Error {
             }
         }
 
-        return this.message;
+        if (e.message) {
+            return e.message;
+        }
+
+        if (e.id) {
+            return e.id;
+        }
+
+        return "Uknown error";
     }
 
     getError(): IError {
