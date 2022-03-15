@@ -94,12 +94,43 @@ const main = async () => {
         // eslint-disable-next-line no-console
         console.log(JSON.stringify(orderDetail, null, 4));
 
+        // Add Priority Fee
+
+        const priorityFeeStatus = await sdKClient.Order.addPriorityFee("HK", order.id, "15");
+        const orderDetailWithPriorityFee = await sdKClient.Order.retrieve("HK", order.id);
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== GET ORDER DETAILS WITH PRIORITY FEE ==="));
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(orderDetailWithPriorityFee, null, 4));
+
         // Get Driver detail
 
         // eslint-disable-next-line no-console
         console.log(JSON.stringify("=== GET Driver DETAIL ==="));
         try {
-            const driverDetail = await sdKClient.Driver.retrieve("HK", order.driverId, order.id);
+            const driverDetail = await sdKClient.Driver.retrieve("HK", "93965", "136970806262");
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(driverDetail, null, 4));
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e.message);
+        }
+
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== Cancel Driver ==="));
+        try {
+            const status = await sdKClient.Driver.cancel("HK", "93965", "136970806262", "NO_NEED");
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify(status, null, 4));
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log(e.message);
+        }
+
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify("=== GET Driver DETAIL After cancel==="));
+        try {
+            const driverDetail = await sdKClient.Driver.retrieve("HK", "93965", "136970806262");
             // eslint-disable-next-line no-console
             console.log(JSON.stringify(driverDetail, null, 4));
         } catch (e) {

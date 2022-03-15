@@ -11,6 +11,7 @@ export default function signRequest(
     const rawSignature = body
         ? `${time}\r\n${method}\r\n${path}\r\n\r\n${body}`
         : `${time}\r\n${method}\r\n${path}\r\n\r\n`;
+
     const SIGNATURE = CryptoJS.HmacSHA256(rawSignature, config.privateKey).toString();
     return SIGNATURE;
 }

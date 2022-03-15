@@ -1,8 +1,13 @@
 import Base from "./base";
-import { default as MarketResponse } from "./response/market";
+import { IMarket } from "./response/market";
+import MarketHTTPClient from "./http/market";
+
+const marketsPath = "/v3/cities";
 
 export default class Market extends Base {
-    retrieve(market: string, id: string): MarketResponse {
-        return new MarketResponse(id, []);
+    async retrieve(market: string): Promise<IMarket> {
+        const httpClient = new MarketHTTPClient(this.config);
+        const response = await httpClient.get(market, `${marketsPath}`);
+        return response;
     }
 }

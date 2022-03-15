@@ -1,9 +1,13 @@
-import Config from "./config";
-import { default as CityResponse } from "./response/city";
+import { ICity } from "./response/city";
 import Base from "./base";
+import CityHTTPClient from "./http/city";
+
+const marketsPath = "/v3/cities";
 
 export default class City extends Base {
-    retrieve(market: string, id: string): CityResponse {
-        return new CityResponse();
+    async retrieve(market: string, id: string): Promise<ICity> {
+        const httpClient = new CityHTTPClient(this.config);
+        const response = await httpClient.get(market, id, `${marketsPath}`);
+        return response;
     }
 }
