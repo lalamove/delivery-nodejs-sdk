@@ -33,7 +33,7 @@ export default class CityHTTPClient extends BaseHTTPClient {
                     }
                 })
                 .catch((e) => {
-                    reject(e);
+                    reject(new Error(e.mapErrorMessage(e)));
                 });
         });
     }

@@ -2,6 +2,7 @@ import https from "https";
 import Config from "../config";
 import signRequest from "../auth";
 import APIError from "../error";
+import { defineCallerModule } from "./util";
 
 export default class BaseHTTPClient {
     private http = https;
@@ -48,9 +49,10 @@ export default class BaseHTTPClient {
                     if (res.statusCode > 299) {
                         reject(
                             new APIError(
+                                defineCallerModule(path, method),
                                 res.statusCode,
                                 data,
-                                `Problem with the request [${method}] ${path}. Status code: ${res.statusCode}`
+                                `Something went wrong with your request.`
                             )
                         );
                         return;
@@ -74,7 +76,7 @@ export default class BaseHTTPClient {
             request.on("error", (err: { message: any }) => {
                 // eslint-disable-next-line no-console
                 console.error(`Encountered an error trying to make a request: ${err.message}`);
-                reject(err);
+                reject(new APIError(defineCallerModule(path, method), 0, "", err.message));
             });
         });
     }
