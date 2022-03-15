@@ -1,6 +1,6 @@
 {
   "name": "testing",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "delivery-nodejs-sdk": "file:.."
+    "delivery-nodejs-sdk": "^1.0.3"
   }
 }
