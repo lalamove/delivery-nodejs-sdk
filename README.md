@@ -161,7 +161,7 @@ const order = await sdKClient.Order.create("HK", orderPayload);
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -186,7 +186,7 @@ await sdKClient.Order.retrieve("HK", order.id);
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -211,7 +211,7 @@ await sdKClient.Order.addPriorityFee("HK", order.id, "15")
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -236,7 +236,7 @@ await sdKClient.Order.cancel("HK", order.id);
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
