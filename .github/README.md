@@ -1,11 +1,25 @@
-# Lalamove's Delivery SDK
+## Lalamove's Delivery SDK
 
-# Prerequisites:
+Prerequisites:
 
 1. NodeJs
 2. NPM
+3. Typescript
 
-To install the dependencies and build the SDK run `make build`
+**To install the dependencies and build the SDK run `make build`**
+
+**To test the SDK locally:**
+
+1. Run `make test`
+2. Now you should be able to import the SDK to your Nodejs files in `/testing` directory (ex. `const delivery_sdk = require('delivery-nodejs-sdk');`)
+
+**To format code and show the styling problems run `make format`**
+
+**To publish to NPM registry:**
+
+1. Login to NPM registry from terminal
+2. Run `npm version patch`
+3. Run `npm publish`
 
 ---
 
@@ -18,7 +32,7 @@ You can specify the environment in a config object `SDKClient.Config`. By defaul
 ```
     const SDKClient = require("delivery-nodejs-sdk");
 
-    const sdKClient = new SDKClient.ClientModule(
+    const sdkClient = new SDKClient.ClientModule(
         new SDKClient.Config(
             "public_key",
             "secret_key",
@@ -31,13 +45,13 @@ You can specify the environment in a config object `SDKClient.Config`. By defaul
 
 ## Quotation
 
-`sdKClient.Quotation`
+`sdkClient.Quotation`
 
 ### Create quotation
 
 To create new quotation for your order call
 
-`sdKClient.Quotation.create(market: string, quotationPayload: QuotationPayload): Promise<IQuotation>;`
+`sdkClient.Quotation.create(market: string, quotationPayload: QuotationPayload): Promise<IQuotation>;`
 
 function.
 
@@ -73,7 +87,7 @@ You can import `SDKClient.QuotationPayloadBuilder`, a helper function that will 
         .build();
 
 
-    await sdKClient.Quotation.create("HK", quotationPayload);
+    await sdkClient.Quotation.create("HK", quotationPayload);
 ```
 
 #### Response
@@ -161,7 +175,7 @@ const order = await sdKClient.Order.create("HK", orderPayload);
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -186,7 +200,7 @@ await sdKClient.Order.retrieve("HK", order.id);
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -211,7 +225,7 @@ await sdKClient.Order.addPriorityFee("HK", order.id, "15")
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -236,7 +250,7 @@ await sdKClient.Order.cancel("HK", order.id);
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 interface IOrder {
@@ -253,14 +267,59 @@ interface IOrder {
 
 ## Driver
 
+`sdkClient.Driver`
+
 ### Retrieve driver
+
+To retrieve driver details for your order call
+
+`sdkClient.Driver.retrieve(market, driverId, orderID)`
+
+function.
+
+You can get `driverId` from order details when a driver picks up the order. The resulting object that will be returned by the function above is as follows:
+
+```
+{
+    "driverId": "93965",
+    "name": "Driver's Name'",
+    "phone": "+85210002001",
+    "plateNumber": "**T-00*",
+    "photo": "www.example.com/photo"
+}
+
+```
 
 ### Change driver
 
+To change the driver for your order call
+
+`sdkClient.Driver.cancel(market, driverId, orderID)`
+
+function.
+
+You can get `driverId` from order details when a driver picks up the order. The return value of the function above is as follows:
+
+```
+true 
+```
+
 ## Market
 
+A market is a mostly synonymous to country. This SDK allows you to get all the service types in all cities in the specified market
 ### Retrieve market
+
+To retrieve all cities with their corresponding service types in a specific market call
+
+`sdkClient.Market.retrieve(market)`
 
 ## City
 
+`sdkClient.City`
+
 ### Retrieve city
+
+To retrieve service types for a specific city
+`sdkClient.City.retrieve(market, id)`
+
+The `id` param is a city identifier. You can see different city codes by calling `retrieve.Market`

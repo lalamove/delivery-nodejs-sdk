@@ -1,12 +1,5 @@
 # Lalamove's Delivery SDK
 
-# Prerequisites:
-
-1. NodeJs
-2. NPM
-
-To install the dependencies and build the SDK run `make build`
-
 ---
 
 # Usage
