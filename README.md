@@ -174,7 +174,6 @@ interface IOrder {
     distance: Measurement;
     stops: Stop[];
 }
-
 ```
 
 ### Retrieve order
@@ -200,6 +199,7 @@ interface IOrder {
     distance: Measurement;
     stops: Stop[];
 }
+```
 
 ### Add priority fee
 
@@ -224,6 +224,7 @@ interface IOrder {
     distance: Measurement;
     stops: Stop[];
 }
+```
 
 ### Cancel order
 
@@ -248,6 +249,7 @@ interface IOrder {
     distance: Measurement;
     stops: Stop[];
 }
+```
 
 ## Driver
 
