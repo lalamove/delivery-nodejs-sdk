@@ -78,7 +78,7 @@ You can import `SDKClient.QuotationPayloadBuilder`, a helper function that will 
 
 #### Response
 
-Promise of 
+Promise of
 
 ```
 IQuotation {
@@ -95,17 +95,159 @@ IQuotation {
 
 ### Retrieve quotation
 
+#### Request
+
+```
+const quotDetail = await sdKClient.Quotation.retrieve(market: string, quotationId: string);
+```
+
+#### Response
+
+Promise of
+
+```
+IQuotation {
+    id: string;
+    scheduleAt: Date;
+    serviceType: string;
+    specialRequests: string[];
+    expiresAt: Date;
+    priceBreakdown: PriceBreakdown;
+    isRouteOptimized: boolean;
+    stops: Stop[];
+}
+```
+
 ---
 
 ## Order
 
+`SDKCLient.Order`
+
 ### Create order
+
+To place an new order
+
+`sdKClient.Order.create(market: string, orderPayload: OrderPayload): Promise<IOrder>;`
+
+function.
+
+You can import `SDKClient.OrderPayloadBuilder`, a helper function that will allow you to build the payload needed for Order in easy manner.
+
+```
+const orderPayload = SDKClient.OrderPayloadBuilder.orderPayload()
+        .withIsPODEnabled(true)
+        .withQuotationID(quotation.id)
+        .withSender({
+            stopId: quotation.stops[0].stopId,
+            name: "Michal",
+            phone: "+85256847123",
+        })
+        .withRecipients([
+            {
+                stopId: quotation.stops[1].stopId,
+                name: "Rustam",
+                phone: "+85256847456",
+            },
+        ])
+        .build();
+```
+
+#### Request
+
+```
+const order = await sdKClient.Order.create("HK", orderPayload);
+```
+
+#### Response
+
+Promise of 
+
+```
+interface IOrder {
+    id: string;
+    quotationId: string;
+    priceBreakdown: PriceBreakdown;
+    driverId: string;
+    shareLink: string;
+    status: string;
+    distance: Measurement;
+    stops: Stop[];
+}
+
+```
 
 ### Retrieve order
 
+#### Request
+
+```
+await sdKClient.Order.retrieve("HK", order.id);
+```
+
+#### Response
+
+Promise of 
+
+```
+interface IOrder {
+    id: string;
+    quotationId: string;
+    priceBreakdown: PriceBreakdown;
+    driverId: string;
+    shareLink: string;
+    status: string;
+    distance: Measurement;
+    stops: Stop[];
+}
+
 ### Add priority fee
 
+#### Request
+
+```
+await sdKClient.Order.addPriorityFee("HK", order.id, "15")
+```
+
+#### Response
+
+Promise of 
+
+```
+interface IOrder {
+    id: string;
+    quotationId: string;
+    priceBreakdown: PriceBreakdown;
+    driverId: string;
+    shareLink: string;
+    status: string;
+    distance: Measurement;
+    stops: Stop[];
+}
+
 ### Cancel order
+
+#### Request
+
+```
+await sdKClient.Order.cancel("HK", order.id);
+```
+
+#### Response
+
+Promise of 
+
+```
+interface IOrder {
+    id: string;
+    quotationId: string;
+    priceBreakdown: PriceBreakdown;
+    driverId: string;
+    shareLink: string;
+    status: string;
+    distance: Measurement;
+    stops: Stop[];
+}
 
 ## Driver
 
