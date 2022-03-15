@@ -1,0 +1,6 @@
+/testing
+/src
+.eslintrc.json
+.gitignore
+.prettierrc.json
+Makefile
