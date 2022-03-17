@@ -22,6 +22,12 @@ export default class BaseHTTPClient {
         method: string = "GET"
     ): Promise<JSON> {
         return new Promise<JSON>((resolve, reject) => {
+            let nodeVersion = "not defined";
+
+            if (typeof process !== "undefined") {
+                nodeVersion = process.version;
+            }
+
             const options = {
                 host: this.config.host,
                 path,
@@ -31,7 +37,7 @@ export default class BaseHTTPClient {
                     "Content-Type": "application/json; charset=UTF-8",
                     "SDK-Type": "nodejs",
                     "SDK-Version": version,
-                    "SDK-Language-Version": process.version,
+                    "SDK-Language-Version": nodeVersion,
                     Authorization: `hmac ${this.config.publicKey}:${new Date()
                         .getTime()
                         .toString()}:${signRequest(
