@@ -31,6 +31,7 @@ export default class BaseHTTPClient {
                     "Content-Type": "application/json; charset=UTF-8",
                     "SDK-Type": "nodejs",
                     "SDK-Version": version,
+                    "SDK-Language-Version": process.version,
                     Authorization: `hmac ${this.config.publicKey}:${new Date()
                         .getTime()
                         .toString()}:${signRequest(
@@ -42,6 +43,7 @@ export default class BaseHTTPClient {
                     Market: market,
                 },
             };
+
             const request = https.request(options, (res: any) => {
                 let data = "";
 
