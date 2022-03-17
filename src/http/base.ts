@@ -4,6 +4,8 @@ import signRequest from "../auth";
 import APIError from "../error";
 import { defineCallerModule } from "./util";
 
+const { version } = require("../../package.json");
+
 export default class BaseHTTPClient {
     private http = https;
 
@@ -27,6 +29,8 @@ export default class BaseHTTPClient {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json; charset=UTF-8",
+                    "SDK-Type": "nodejs",
+                    "SDK-version": version,
                     Authorization: `hmac ${this.config.publicKey}:${new Date()
                         .getTime()
                         .toString()}:${signRequest(
