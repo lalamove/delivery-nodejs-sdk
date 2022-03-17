@@ -30,7 +30,7 @@ export default class BaseHTTPClient {
                     Accept: "application/json",
                     "Content-Type": "application/json; charset=UTF-8",
                     "SDK-Type": "nodejs",
-                    "SDK-version": version,
+                    "SDK-Version": version,
                     Authorization: `hmac ${this.config.publicKey}:${new Date()
                         .getTime()
                         .toString()}:${signRequest(
