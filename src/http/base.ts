@@ -4,6 +4,8 @@ import signRequest from "../auth";
 import APIError from "../error";
 import { defineCallerModule } from "./util";
 
+const { version } = require("../../package.json");
+
 export default class BaseHTTPClient {
     private http = https;
 
@@ -20,6 +22,12 @@ export default class BaseHTTPClient {
         method: string = "GET"
     ): Promise<JSON> {
         return new Promise<JSON>((resolve, reject) => {
+            let nodeVersion = "not defined";
+
+            if (typeof process !== "undefined") {
+                nodeVersion = process.version;
+            }
+
             const options = {
                 host: this.config.host,
                 path,
@@ -27,6 +35,9 @@ export default class BaseHTTPClient {
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json; charset=UTF-8",
+                    "SDK-Type": "nodejs",
+                    "SDK-Version": version,
+                    "SDK-Language-Version": nodeVersion,
                     Authorization: `hmac ${this.config.publicKey}:${new Date()
                         .getTime()
                         .toString()}:${signRequest(
@@ -38,6 +49,7 @@ export default class BaseHTTPClient {
                     Market: market,
                 },
             };
+
             const request = https.request(options, (res: any) => {
                 let data = "";
 
