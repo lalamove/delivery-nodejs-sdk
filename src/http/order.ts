@@ -48,9 +48,9 @@ export default class OrderHTTPClient extends BaseHTTPClient {
         });
     }
 
-    patch(market: string, path: string, priorityFee: object): Promise<boolean> {
+    post_priorityfee(market: string, path: string, priorityFee: object): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            const response = this.makeCall<object>(market, path, priorityFee, "PATCH");
+            const response = this.makeCall<object>(market, path, priorityFee, "POST");
             response
                 .then(() => {
                     resolve(true);

@@ -26,7 +26,7 @@ export default class Order extends Base {
 
     async addPriorityFee(market: string, orderId: string, fee: string): Promise<boolean> {
         const httpClient = new OrderHTTPClient(this.config);
-        await httpClient.patch(market, `${orderPath}/${orderId}`, {priorityFee: fee});
+        await httpClient.post_priorityfee(market, `${orderPath}/${orderId}/priority-fee`, {priorityFee: fee});
         return true
     }
 }
