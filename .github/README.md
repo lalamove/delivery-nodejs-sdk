@@ -15,12 +15,6 @@ Prerequisites:
 
 **To format code and show the styling problems run `make format`**
 
-**To publish to NPM registry:**
-
-1. Login to NPM registry from terminal
-2. Run `npm version patch`
-3. Run `npm publish`
-
 ---
 
 # Usage
