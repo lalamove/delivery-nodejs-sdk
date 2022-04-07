@@ -1,5 +1,5 @@
 {
-    "name": "@lalamove/delivery-nodejs-sdk",
+    "name": "@lalamove/lalamove-js",
     "version": "1.0.7",
     "description": ".",
     "main": "dist/index.js",
