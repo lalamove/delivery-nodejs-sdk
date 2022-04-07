@@ -9,7 +9,7 @@
 You can specify the environment in a config object `SDKClient.Config`. By default it will initialize client for `sandbox` env. To use it for production just pass `production` string.
 
 ```
-    const SDKClient = require("delivery-nodejs-sdk");
+    const SDKClient = require("@lalamove/delivery-nodejs-sdk");
 
     const sdkClient = new SDKClient.ClientModule(
         new SDKClient.Config(
