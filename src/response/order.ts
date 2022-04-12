@@ -11,4 +11,5 @@ export interface IOrder {
     status: string;
     distance: Measurement;
     stops: Stop[];
+    metadata: object;
 }

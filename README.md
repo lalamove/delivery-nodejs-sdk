@@ -143,6 +143,9 @@ const orderPayload = SDKClient.OrderPayloadBuilder.orderPayload()
                 phone: "+85256847456",
             },
         ])
+        .withMetadata({
+            "internalId": "123123"
+        })
         .build();
 ```
 
@@ -166,6 +169,7 @@ interface IOrder {
     status: string;
     distance: Measurement;
     stops: Stop[];
+    metadata: object;
 }
 ```
 
@@ -191,6 +195,7 @@ interface IOrder {
     status: string;
     distance: Measurement;
     stops: Stop[];
+    metadata: object;
 }
 ```
 
@@ -216,6 +221,7 @@ interface IOrder {
     status: string;
     distance: Measurement;
     stops: Stop[];
+    metadata: object;
 }
 ```
 
@@ -241,6 +247,7 @@ interface IOrder {
     status: string;
     distance: Measurement;
     stops: Stop[];
+    metadata: object;
 }
 ```
 
