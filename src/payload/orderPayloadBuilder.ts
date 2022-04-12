@@ -15,6 +15,8 @@ export default class OrderPayloadBuilder {
 
     partner?: string;
 
+    metadata?: object;
+
     static orderPayload(): OrderPayloadBuilder {
         return new OrderPayloadBuilder();
     }
@@ -46,6 +48,11 @@ export default class OrderPayloadBuilder {
 
     withPartner(partner: string): OrderPayloadBuilder {
         this.partner = partner;
+        return this;
+    }
+
+    withMetadata(metadata: object): OrderPayloadBuilder {
+        this.metadata = metadata;
         return this;
     }
 

@@ -15,6 +15,8 @@ export default class OrderPayload {
 
     private partner?: string;
 
+    private metadata?: object;
+
     constructor(opb: OrderPayloadBuilder) {
         if (opb.quotationId === undefined) {
             throw new Error("QuotationID cannot be empty");
@@ -31,5 +33,6 @@ export default class OrderPayload {
         this.isPODEnabled = opb.isPODEnabled;
         this.isRecipientSMSEnabled = opb.isRecipientSMSEnabled;
         this.partner = opb.partner;
+        this.metadata = opb.metadata;
     }
 }
