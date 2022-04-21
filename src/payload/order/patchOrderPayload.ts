@@ -6,12 +6,13 @@ export default class PatchOrderPayload {
 
     constructor(builder: PatchOrderPayloadBuilder) {
         const { stops } = builder;
+        const stopsLength = stops?.length ?? 0;
 
-        if (!stops || !(stops?.length ?? 0 > 2)) {
-            throw new Error("Stops must be at least 2");
+        if (stopsLength > 17 || stopsLength < 2) {
+            throw new Error("Stops must be between 2 and 17");
         }
 
-        if (!stops.every((x) => x.address)) {
+        if (!stops?.every((x) => x.address)) {
             throw new Error("Address cannot be empty");
         }
 
