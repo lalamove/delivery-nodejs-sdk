@@ -14,7 +14,7 @@ export default class Quotation extends Base {
 
     async retrieve(market: string, orderId: string): Promise<IQuotation> {
         const httpClient = new QuotationHTTPClient(this.config);
-        const response = await httpClient.get(market, `${quotaionsPath}/${orderId}`);
+        const response = await httpClient.get(market, `${quotationPath}/${orderId}`);
         return response;
     }
 }
