@@ -173,6 +173,72 @@ interface IOrder {
 }
 ```
 
+### Edit order
+
+To edit an existing order
+
+`sdKClient.Order.edit(market: string, orderId: string, patchOrderPayload: PatchOrderPayload): Promise<IOrder>;`
+
+function.
+
+You can import `SDKClient.PatchOrderPayloadBuilder`, a helper function that will allow you to build the payload needed for Order in easy manner.
+
+```
+const patchOrderPayload = SDKClient.PatchOrderPayloadBuilder.patchOrderPayload()
+        .withStops([
+            {
+                coordinates: {
+                lat: "22.3353139",
+                lng: "114.1758402",
+                },
+                address: "Wu Kai Sha Road",
+                name: "Michal",
+                phone: "+85256847123",
+            },
+            {
+                coordinates: {
+                lat: "22.2827206",
+                lng: "114.2123009",
+                },
+                address: "Quarry Bay, Hong Kong",
+            },
+            {
+                coordinates: {
+                lat: "22.3203648",
+                lng: "114.169773",
+                },
+                address: "Wu Kai Sha Road",
+                name: "Rustam",
+                phone: "+85256847456",
+            },
+        ])
+        .build();
+```
+
+#### Request
+
+```
+const order = await sdKClient.Order.edit("HK", order.id, payload);
+```
+
+#### Response
+
+Promise of
+
+```
+interface IOrder {
+    id: string;
+    quotationId: string;
+    priceBreakdown: PriceBreakdown;
+    driverId: string;
+    shareLink: string;
+    status: string;
+    distance: Measurement;
+    stops: Stop[];
+    metadata: object;
+}
+```
+
 ### Retrieve order
 
 #### Request
