@@ -7,8 +7,6 @@ import { defineCallerModule } from "./util";
 const { version } = require("../../package.json");
 
 export default class BaseHTTPClient {
-    private http = https;
-
     private config;
 
     constructor(config: Config) {
@@ -19,7 +17,7 @@ export default class BaseHTTPClient {
         market: string,
         path: string,
         body?: PayloadType,
-        method: string = "GET"
+        method: "GET" | "POST" | "PATCH" | "DELETE" = "GET"
     ): Promise<JSON> {
         return new Promise<JSON>((resolve, reject) => {
             let nodeVersion = "not defined";
@@ -28,7 +26,7 @@ export default class BaseHTTPClient {
                 nodeVersion = process.version;
             }
 
-            const options = {
+            const options: https.RequestOptions = {
                 host: this.config.host,
                 path,
                 method,
