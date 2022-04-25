@@ -4,6 +4,7 @@ export const enum CallerModule {
     PostQuotation,
     GetQuotation,
     PostOrder,
+    PatchOrder,
     GetOrder,
     CancellOrder,
     GetDriver,
@@ -24,6 +25,10 @@ export function defineCallerModule(path: string, method: string): CallerModule {
 
     if (method === "POST" && path === "/v3/orders") {
         return CallerModule.PostOrder;
+    }
+
+    if (method === "PATCH" && path.match(`/v3/order/(.*)$`)) {
+        return CallerModule.PatchOrder;
     }
 
     if (method === "GET" && path.match(`/v3/order/(.*)$`)) {
