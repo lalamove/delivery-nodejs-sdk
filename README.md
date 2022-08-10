@@ -358,7 +358,7 @@ true
 
 ## Market
 
-A market is a mostly synonymous to country. This SDK allows you to get all the service types in all cities in the specified market
+A market is the location where Lalamove has launched its services. This SDK allows you to get all the service types in all cities in the specified market
 ### Retrieve market
 
 To retrieve all cities with their corresponding service types in a specific market call
