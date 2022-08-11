@@ -1,5 +1,6 @@
 import BaseHTTPClient from "./base";
-import {IMarket} from "../response/market";
+import { IMarket } from "../response/market";
+import { ICity } from "../response/city";
 
 export default class MarketHTTPClient extends BaseHTTPClient {
     get(market: string, path: string): Promise<IMarket> {
@@ -7,23 +8,24 @@ export default class MarketHTTPClient extends BaseHTTPClient {
             const response = this.makeCall<null>(market, path);
             response
                 .then((d: any) => {
-
-                    for (let i = 0; i < d.length; i++){
-                        let curr = d[i];
-                        curr.id = curr.locode;
-                        delete curr.locode;
-                        d[i] = curr;
-                    }
-                    const IMarket = {
+                    const cities: ICity[] = d?.map((city: any) => {
+                        const temp = {
+                            id: city.locode,
+                        };
+                        Object.keys(city).forEach((key) => {
+                            if (key !== "locode") {
+                                Object.assign(temp, { [key]: city[key] });
+                            }
+                        });
+                        return temp;
+                    });
+                    const iMarket: IMarket = {
                         id: market,
-                        cities: d
+                        cities,
                     };
-
-                    resolve(<IMarket>(<unknown>IMarket));
+                    resolve(iMarket);
                 })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .catch(MarketHTTPClient.errorHandler(reject));
         });
     }
 }

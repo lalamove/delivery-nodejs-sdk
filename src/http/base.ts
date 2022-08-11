@@ -13,6 +13,16 @@ export default class BaseHTTPClient {
         this.config = config;
     }
 
+    protected static errorHandler(reject: any) {
+        return (error: Error | APIError) => {
+            if (error instanceof APIError) {
+                reject(new Error(APIError.mapErrorMessage(error)));
+            } else {
+                reject(error);
+            }
+        };
+    }
+
     protected makeCall<PayloadType>(
         market: string,
         path: string,

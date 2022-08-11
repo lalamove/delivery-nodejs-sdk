@@ -12,7 +12,7 @@ export default class PatchOrderPayload {
             throw new Error("Stops must be between 2 and 17");
         }
 
-        if (!stops?.every((x) => x.address)) {
+        if (!stops?.every((stop) => stop.address)) {
             throw new Error("Address cannot be empty");
         }
 
