@@ -36,6 +36,8 @@ export default class BaseHTTPClient {
                 nodeVersion = process.version;
             }
 
+            const requestTimestamp = Date.now();
+
             const options: https.RequestOptions = {
                 host: this.config.host,
                 path,
@@ -46,12 +48,11 @@ export default class BaseHTTPClient {
                     "SDK-Type": "nodejs",
                     "SDK-Version": version,
                     "SDK-Language-Version": nodeVersion,
-                    Authorization: `hmac ${this.config.publicKey}:${new Date()
-                        .getTime()
-                        .toString()}:${signRequest(
+                    Authorization: `hmac ${this.config.publicKey}:${requestTimestamp}:${signRequest(
                         this.config,
                         method,
                         path,
+                        requestTimestamp,
                         body ? `{"data": ${JSON.stringify(body)}}` : undefined
                     )}`,
                     Market: market,
