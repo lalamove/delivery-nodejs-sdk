@@ -32,9 +32,7 @@ export default class CityHTTPClient extends BaseHTTPClient {
                         throw new Error("No such city");
                     }
                 })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .catch(CityHTTPClient.errorHandler(reject));
         });
     }
 }

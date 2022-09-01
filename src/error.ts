@@ -46,7 +46,7 @@ export default class APIError extends Error {
         this.date = new Date();
     }
 
-    mapErrorMessage(err: APIError | Error): string {
+    static mapErrorMessage(err: APIError | Error): string {
         if (!(err instanceof APIError)) {
             return err.message;
         }
@@ -56,9 +56,7 @@ export default class APIError extends Error {
         if (err.errors && e.id && schemaValidationErrors.includes(e.id)) {
             const what = e.detail?.replace("/data/", "");
             const why = e.message;
-            this.message = new Error(`Problem with ${what} because of ${why}`).message;
-
-            return this.message;
+            return `Problem with ${what} because of ${why}`;
         }
 
         if (err.httpStatus === 401) {
@@ -75,7 +73,10 @@ export default class APIError extends Error {
             }
         }
 
-        if (err.callerModule === CallerModule.ChangeDriver || err.callerModule === CallerModule.GetDriver) {
+        if (
+            err.callerModule === CallerModule.ChangeDriver ||
+            err.callerModule === CallerModule.GetDriver
+        ) {
             if (err.httpStatus === 404) {
                 return "Driver not found.";
             }

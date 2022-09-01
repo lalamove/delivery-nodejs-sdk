@@ -1,17 +1,35 @@
 import { IDriver } from "../response/driver";
 import BaseHTTPClient from "./base";
+import { Contact } from "../models/contact";
 
 export default class DriverHTTPClient extends BaseHTTPClient {
+    private static toIDriver(resolve: any) {
+        return (d: any) => {
+            const driver = d;
+            driver.id = driver.driverId;
+            const contact: Contact = {
+                name: driver.name,
+                phone: driver.phone,
+            };
+            driver.updatedAt = driver?.coordinates?.updatedAt;
+            if (driver.updatedAt) {
+                driver.updatedAt = new Date(driver.updatedAt);
+            }
+            delete driver.name;
+            delete driver.phone;
+            delete driver.driverId;
+            delete driver?.coordinates?.updatedAt;
+            driver.contact = contact;
+            resolve(<IDriver>(<unknown>driver));
+        };
+    }
+
     get(market: string, path: string): Promise<IDriver> {
         return new Promise<IDriver>((resolve, reject) => {
             const response = this.makeCall<null>(market, path);
             response
-                .then((d) => {
-                    resolve(<IDriver>(<unknown>d));
-                })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .then(DriverHTTPClient.toIDriver(resolve))
+                .catch(DriverHTTPClient.errorHandler(reject));
         });
     }
 
@@ -22,10 +40,7 @@ export default class DriverHTTPClient extends BaseHTTPClient {
                 .then(() => {
                     resolve(true);
                 })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .catch(DriverHTTPClient.errorHandler(reject));
         });
     }
-
 }
