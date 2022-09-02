@@ -5,12 +5,12 @@ export default function signRequest(
     config: Config,
     method: string,
     path: string,
+    timestamp: number,
     body?: string
 ): string {
-    const time = new Date().getTime().toString();
     const rawSignature = body
-        ? `${time}\r\n${method}\r\n${path}\r\n\r\n${body}`
-        : `${time}\r\n${method}\r\n${path}\r\n\r\n`;
+        ? `${timestamp}\r\n${method}\r\n${path}\r\n\r\n${body}`
+        : `${timestamp}\r\n${method}\r\n${path}\r\n\r\n`;
 
     const SIGNATURE = CryptoJS.HmacSHA256(rawSignature, config.privateKey).toString();
     return SIGNATURE;

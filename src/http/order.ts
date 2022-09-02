@@ -4,19 +4,26 @@ import OrderPayload from "../payload/orderPayload";
 import PatchOrderPayload from "../payload/order/patchOrderPayload";
 
 export default class OrderHTTPClient extends BaseHTTPClient {
+    private static toIOrder(resolve: any) {
+        return (d: any) => {
+            const order = d;
+            order.id = order.orderId;
+            delete order.orderId;
+            order.stops?.forEach((stopData: any) => {
+                const stop = stopData;
+                stop.id = stop.stopId;
+                delete stop.stopId;
+            });
+            resolve(<IOrder>(<unknown>order));
+        };
+    }
+
     post(market: string, path: string, body: OrderPayload): Promise<IOrder> {
         return new Promise<IOrder>((resolve, reject) => {
             const response = this.makeCall<OrderPayload>(market, path, body, "POST");
             response
-                .then((d: any) => {
-                    const order = d;
-                    order.id = order.orderId;
-                    delete order.orderId;
-                    resolve(<IOrder>(<unknown>order));
-                })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .then(OrderHTTPClient.toIOrder(resolve))
+                .catch(OrderHTTPClient.errorHandler(reject));
         });
     }
 
@@ -24,15 +31,8 @@ export default class OrderHTTPClient extends BaseHTTPClient {
         return new Promise<IOrder>((resolve, reject) => {
             const response = this.makeCall<null>(market, path);
             response
-                .then((d: any) => {
-                    const order = d;
-                    order.id = order.orderId;
-                    delete order.orderId;
-                    resolve(<IOrder>(<unknown>order));
-                })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .then(OrderHTTPClient.toIOrder(resolve))
+                .catch(OrderHTTPClient.errorHandler(reject));
         });
     }
 
@@ -43,9 +43,7 @@ export default class OrderHTTPClient extends BaseHTTPClient {
                 .then(() => {
                     resolve(true);
                 })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .catch(OrderHTTPClient.errorHandler(reject));
         });
     }
 
@@ -56,9 +54,7 @@ export default class OrderHTTPClient extends BaseHTTPClient {
                 .then(() => {
                     resolve(true);
                 })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .catch(OrderHTTPClient.errorHandler(reject));
         });
     }
 
@@ -66,15 +62,8 @@ export default class OrderHTTPClient extends BaseHTTPClient {
         return new Promise<IOrder>((resolve, reject) => {
             const response = this.makeCall<PatchOrderPayload>(market, path, body, "PATCH");
             response
-                .then((d: any) => {
-                    const order = d;
-                    order.id = order.orderId;
-                    delete order.orderId;
-                    resolve(<IOrder>(<unknown>order));
-                })
-                .catch((e) => {
-                    reject(new Error(e.mapErrorMessage(e)));
-                });
+                .then(OrderHTTPClient.toIOrder(resolve))
+                .catch(OrderHTTPClient.errorHandler(reject));
         });
     }
 }

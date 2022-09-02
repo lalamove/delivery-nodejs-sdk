@@ -1,4 +1,4 @@
 export interface SpecialRequest {
-    key: string;
+    name: string;
     description: string;
 }
