@@ -2,7 +2,6 @@ import { IOrder } from "../response/order";
 import BaseHTTPClient from "./base";
 import OrderPayload from "../payload/orderPayload";
 import PatchOrderPayload from "../payload/order/patchOrderPayload";
-import { Contact } from "../models/contact";
 
 export default class OrderHTTPClient extends BaseHTTPClient {
     private static toIOrder(resolve: any) {
@@ -13,14 +12,7 @@ export default class OrderHTTPClient extends BaseHTTPClient {
             order.stops?.forEach((stopData: any) => {
                 const stop = stopData;
                 stop.id = stop.stopId;
-                const contact: Contact = {
-                    name: stopData.name,
-                    phone: stopData.phone,
-                };
-                delete stop.name;
-                delete stop.phone;
                 delete stop.stopId;
-                stop.contact = contact;
             });
             resolve(<IOrder>(<unknown>order));
         };

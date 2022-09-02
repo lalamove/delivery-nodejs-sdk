@@ -183,7 +183,7 @@ interface IOrder {
     shareLink: string;
     status: string;
     distance: Measurement;
-    stops: Stop[];
+    stops: StopWithContact[];
     metadata: object;
 }
 ```
@@ -249,7 +249,7 @@ interface IOrder {
     shareLink: string;
     status: string;
     distance: Measurement;
-    stops: Stop[];
+    stops: StopWithContact[];
     metadata: object;
 }
 ```
@@ -275,7 +275,7 @@ interface IOrder {
     shareLink: string;
     status: string;
     distance: Measurement;
-    stops: Stop[];
+    stops: StopWithContact[];
     metadata: object;
 }
 ```
@@ -301,7 +301,7 @@ interface IOrder {
     shareLink: string;
     status: string;
     distance: Measurement;
-    stops: Stop[];
+    stops: StopWithContact[];
     metadata: object;
 }
 ```
@@ -327,7 +327,7 @@ interface IOrder {
     shareLink: string;
     status: string;
     distance: Measurement;
-    stops: Stop[];
+    stops: StopWithContact[];
     metadata: object;
 }
 ```

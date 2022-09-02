@@ -1,5 +1,4 @@
 import { Coordinates } from "./coordinates";
-import { Contact } from "./contact";
 
 export interface Stop {
     id?: string;
@@ -8,5 +7,7 @@ export interface Stop {
 }
 
 export interface StopWithContact extends Stop {
-    contact: Contact;
+    name: string;
+    phone: string;
+    POD?: object;
 }
