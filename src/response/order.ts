@@ -1,5 +1,5 @@
 import { PriceBreakdown } from "../models/priceBreakdown";
-import { Stop } from "../models/stop";
+import { StopWithContact } from "../models/stop";
 import { Measurement } from "../models/measurement";
 
 export interface IOrder {
@@ -10,6 +10,6 @@ export interface IOrder {
     shareLink: string;
     status: string;
     distance: Measurement;
-    stops: Stop[];
+    stops: StopWithContact[];
     metadata: object;
 }

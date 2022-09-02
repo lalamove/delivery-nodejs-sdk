@@ -13,6 +13,16 @@ export default class BaseHTTPClient {
         this.config = config;
     }
 
+    protected static errorHandler(reject: any) {
+        return (error: Error | APIError) => {
+            if (error instanceof APIError) {
+                reject(new Error(APIError.mapErrorMessage(error)));
+            } else {
+                reject(error);
+            }
+        };
+    }
+
     protected makeCall<PayloadType>(
         market: string,
         path: string,
@@ -26,6 +36,8 @@ export default class BaseHTTPClient {
                 nodeVersion = process.version;
             }
 
+            const timestamp = Date.now();
+
             const options: https.RequestOptions = {
                 host: this.config.host,
                 path,
@@ -36,12 +48,13 @@ export default class BaseHTTPClient {
                     "SDK-Type": "nodejs",
                     "SDK-Version": version,
                     "SDK-Language-Version": nodeVersion,
-                    Authorization: `hmac ${this.config.publicKey}:${new Date()
-                        .getTime()
-                        .toString()}:${signRequest(
+                    Authorization: `hmac ${
+                        this.config.publicKey
+                    }:${timestamp.toString()}:${signRequest(
                         this.config,
                         method,
                         path,
+                        timestamp,
                         body ? `{"data": ${JSON.stringify(body)}}` : undefined
                     )}`,
                     Market: market,
